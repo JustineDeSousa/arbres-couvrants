@@ -1,2 +1,2 @@
-# projet2
+# Arbres couvrants de poids minimal
  
