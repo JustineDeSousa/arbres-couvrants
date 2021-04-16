@@ -23,6 +23,7 @@ int main() {
   cities = citiesReader(popMin);
 
   // ... just to check! This line can be removed.
+  printf("\n %i cities: \n\n", cities->number);
   for(int i=0; i<cities->number; i++){
     printf("%s %i %f %f\n", cities->name[i], cities->pop[i], cities->lon[i], cities->lat[i]);
   }
