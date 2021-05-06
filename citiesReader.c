@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 ListOfCities* citiesReader(int popMin){
 
@@ -84,4 +85,9 @@ ListOfCities* citiesReader(int popMin){
   }
 
   return cities;
+}
+
+float poids(ListOfCities* cities, int a, int b){
+  int R = 6378;
+  return R*acos( sin(cities->lat[a])*sin(cities->lat[b]) + cos(cities->lon[a] - cities->lon[b])*cos(cities->lat[a])*cos(cities->lat[b]) );
 }
