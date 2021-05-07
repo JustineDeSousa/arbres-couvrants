@@ -20,7 +20,7 @@ int main() {
 //-----------------------------------------------------------------
 
   int popMin;
-  popMin = 100000;
+  popMin = 250000;
   //printf("Minimal population? ");
   //scanf("%i", &popMin);
 
@@ -57,7 +57,7 @@ int main() {
 
   //Itérations
   int k = 0;
-  while(k < cities->number - 1){
+  while(k < cities->number - 2){
     //Trouver i tels que (dansS[i]=false) et (dist[i] est minimal)
     float minDist = FLT_MAX;
     int i = 0;
@@ -80,8 +80,8 @@ int main() {
         }
       }
     }
-    
-  k ++;
+
+    k ++;
   }
 
   

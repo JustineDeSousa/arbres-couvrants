@@ -89,5 +89,7 @@ ListOfCities* citiesReader(int popMin){
 
 float poids(ListOfCities* cities, int a, int b){
   int R = 6378;
-  return R*acos( sin(cities->lat[a])*sin(cities->lat[b]) + cos(cities->lon[a] - cities->lon[b])*cos(cities->lat[a])*cos(cities->lat[b]) );
+  float pi = 3.14;
+  float conversion = pi/180;
+  return R*acos( sin(cities->lat[a] * conversion)*sin(cities->lat[b]*conversion) + cos((cities->lon[a] - cities->lon[b])*conversion)*cos(cities->lat[a]*conversion)*cos(cities->lat[b]*conversion) );
 }
