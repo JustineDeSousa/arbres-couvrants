@@ -20,21 +20,14 @@ int main() {
 //-----------------------------------------------------------------
 
   int popMin;
-  popMin = 250000;
+  popMin = 300000;
   //printf("Minimal population? ");
   //scanf("%i", &popMin);
 
   ListOfCities* cities;
   cities = citiesReader(popMin);
 
-  // ... just to check! This line can be removed.
-  printf("\n %i cities: \n\n", cities->number);
-  printf("%f\n",poids(cities,0,0));
-  /*
-  for(int i=0; i<cities->number; i++){
-    printf("%s %i %f %f\n", cities->name[i], cities->pop[i], cities->lon[i], cities->lat[i]);
-  }
-  */
+ 
 
 //-----------------------------------------------------------------
 //--- COMPUTING graph
@@ -84,8 +77,20 @@ int main() {
     k ++;
   }
 
+  //Calcul de la taille du réseau
+  float taille_reseau;
+  for(int i = 1; i < cities->number; i++){
+    taille_reseau += poids(cities,i,voisin[i]);
+  }
   
-
+  // ... just to check! This line can be removed.
+  printf("\n %i cities: \n\n", cities->number);
+  printf("%f\n",taille_reseau);
+  /*
+  for(int i=0; i<cities->number; i++){
+    printf("%s %i %f %f\n", cities->name[i], cities->pop[i], cities->lon[i], cities->lat[i]);
+  }
+  */
   
 
   // Écriture du graphe (chaque ligne correspond à une arête)
@@ -95,9 +100,7 @@ int main() {
   FILE* fileOut = NULL;
   fileOut = fopen("resuGraph.dat", "w");
   for(int i=0; i<cities->number; i++){
-    for(int j=0; j<i; j++){
-      fprintf(fileOut, "%i %i\n", i, voisin[i]);
-    }
+    fprintf(fileOut, "%i %i\n", i, voisin[i]);
   }
   fclose(fileOut);
 
