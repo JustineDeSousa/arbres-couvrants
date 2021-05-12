@@ -71,6 +71,7 @@ int main() {
           dist[j] = poids(cities,i,j);
           voisin[j] = i;
         }
+
       }
     }
 
@@ -86,11 +87,11 @@ int main() {
   // ... just to check! This line can be removed.
   printf("\n %i cities: \n\n", cities->number);
   printf("%f\n",taille_reseau);
-  /*
+  
   for(int i=0; i<cities->number; i++){
-    printf("%s %i %f %f\n", cities->name[i], cities->pop[i], cities->lon[i], cities->lat[i]);
+    printf("%i/%i: %9s %2i %7i %9f %9f\n",i+1, cities->number, cities->name[i], cities->dpt[i], cities->pop[i], cities->lon[i], cities->lat[i]);
   }
-  */
+  
   
 
   // Écriture du graphe (chaque ligne correspond à une arête)

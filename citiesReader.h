@@ -8,6 +8,7 @@ typedef struct ListOfCities ListOfCities;
 struct ListOfCities
 {
   int    number;
+  int*    dpt;
   char** name;
   int*   pop;
   float* lon;
