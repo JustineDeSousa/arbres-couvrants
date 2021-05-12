@@ -25,7 +25,8 @@ int main() {
   //scanf("%i", &popMin);
 
   ListOfCities* cities;
-  cities = citiesReader(popMin);
+  cities = citiesReader(popMin,6);
+
 
  
 
@@ -66,15 +67,12 @@ int main() {
     
     for(int j = 0; j < cities->number; j++){
       if( dansS[j] == false ){
-        
         if( dist[j] > poids(cities,i,j) ){
           dist[j] = poids(cities,i,j);
           voisin[j] = i;
         }
-
       }
     }
-
     k ++;
   }
 

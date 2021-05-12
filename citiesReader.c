@@ -5,7 +5,7 @@
 #include <string.h>
 #include <math.h>
 
-ListOfCities* citiesReader(int popMin){
+ListOfCities* citiesReader(int popMin, int dpt){
 
   ListOfCities* cities = malloc(sizeof(ListOfCities));
 
@@ -27,11 +27,16 @@ ListOfCities* citiesReader(int popMin){
     cities->number = 0;
     while(fgets(line, 512, inputFile) != NULL){
       token = strtok(line, s);
+      token = strtok(NULL, s);
+      int myDpt = atoi(token);
       for(int i=0; i<14; i++){
         token = strtok(NULL, s);
       }
       int myPop = atoi(token);
-      if(myPop >= popMin) cities->number++;
+      //myDpt = 1;
+      if(myPop >= popMin && myDpt == dpt){
+        cities->number++;
+      }  
     }
     fseek(inputFile, 0, SEEK_SET);
 
@@ -46,7 +51,6 @@ ListOfCities* citiesReader(int popMin){
     int index=0;
     char *myName = malloc(32*sizeof(char));
     while(fgets(line, 512, inputFile) != NULL){
-      
       token = strtok(line, s);
       token = strtok(NULL, s);
       int myDpt = atoi(token);
@@ -60,7 +64,7 @@ ListOfCities* citiesReader(int popMin){
       float myLat = atof(token);
       
       
-      if(myPop >= popMin){
+      if(myPop >= popMin && myDpt == dpt){
         cities->dpt[index] = myDpt;
         cities->name[index] = (char*) malloc(32*sizeof(char));
         strncpy(cities->name[index], myName, 32);

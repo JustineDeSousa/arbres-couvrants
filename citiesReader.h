@@ -15,7 +15,7 @@ struct ListOfCities
   float* lat;
 };
 
-ListOfCities* citiesReader(int popMin);
+ListOfCities* citiesReader(int popMin, int dpt);
 float poids(ListOfCities* cities, int a, int b);
 
 #endif
