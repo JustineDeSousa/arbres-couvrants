@@ -26,6 +26,7 @@ int main() {
 
   ListOfCities* cities;
   cities = citiesReader(popMin,6);
+  //cities = bigcitiesReader();  //read the largest cities of every provinces
 
 
  
