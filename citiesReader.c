@@ -29,7 +29,7 @@ ListOfCities* citiesReader(int popMin, int dpt){
       token = strtok(line, s);
       token = strtok(NULL, s);
       int myDpt = atoi(token);
-      for(int i=0; i<14; i++){
+      for(int i=0; i<13; i++){
         token = strtok(NULL, s);
       }
       int myPop = atoi(token);
