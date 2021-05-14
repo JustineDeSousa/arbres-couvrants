@@ -173,6 +173,18 @@ ListOfCities* bigcitiesReader(){
           Dpt += 1;
         }
       }
+      
+      // read the detail of Paris
+      if (myDpt == 75){
+        cities->dpt[index] = myDpt;
+        cities->name[index] = (char*) malloc(32*sizeof(char));
+        strncpy(cities->name[index], myName, 32);
+        cities->pop[index] = myPop;
+        cities->lon[index] = myLon;
+        cities->lat[index] = myLat;
+        index++;
+        Dpt++;
+      }
 
       //if all the cities has been read
       if (strcmp(lastcity,myName)==0){
