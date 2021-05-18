@@ -9,11 +9,12 @@ ListOfCities* citiesReader(int popMin, int dpt){
 
   ListOfCities* cities = malloc(sizeof(ListOfCities));
 
-//--------------------------------------------------------------------
+//----------------------------------------------------------------------
 //--- READING cities with population greater than or equal to 'popMin'
-//--------------------------------------------------------------------
+//--- and which department == 'dpt' (si dpt == 0, lit pour tous les dpt)
+//----------------------------------------------------------------------
 
-  printf("== Reading cities with population >= %i from 'citiesList.csv' ==\n", popMin);
+  printf("== Reading cities with population >= %i and department = %i from 'citiesList.csv' ==\n", popMin,dpt);
 
   FILE* inputFile = NULL;
   inputFile = fopen("citiesList.csv", "r");
@@ -33,10 +34,10 @@ ListOfCities* citiesReader(int popMin, int dpt){
         token = strtok(NULL, s);
       }
       int myPop = atoi(token);
-      //myDpt = 1;
-      if(myPop >= popMin && myDpt == dpt){
-        cities->number++;
-      }  
+      if( ((myDpt == dpt) || (dpt==0)) && myPop >= popMin){
+        cities->number++;  
+      }
+      
     }
     fseek(inputFile, 0, SEEK_SET);
 
@@ -48,9 +49,10 @@ ListOfCities* citiesReader(int popMin, int dpt){
     cities->lat  = malloc(cities->number*sizeof(float));
     
     // Reading/Saving data
-    int index=0;
+    int index = 0;
     char *myName = malloc(32*sizeof(char));
     while(fgets(line, 512, inputFile) != NULL){
+      //printf("%s\n",line);
       token = strtok(line, s);
       token = strtok(NULL, s);
       int myDpt = atoi(token);
@@ -63,26 +65,25 @@ ListOfCities* citiesReader(int popMin, int dpt){
       for(int i=0; i<1;  i++) token = strtok(NULL, s);
       float myLat = atof(token);
       
-      
-      if(myPop >= popMin && myDpt == dpt){
+      if( ((myDpt == dpt)||(dpt == 0)) && (myPop >= popMin) ){
         cities->dpt[index] = myDpt;
         cities->name[index] = (char*) malloc(32*sizeof(char));
         strncpy(cities->name[index], myName, 32);
         cities->pop[index] = myPop;
         cities->lon[index] = myLon;
         cities->lat[index] = myLat;
+        printf("%3i/%3i: %25s %2i %7i %9f %9f\n",index+1, cities->number, cities->name[index], cities->dpt[index], cities->pop[index], cities->lon[index], cities->lat[index]);
         index++;
       }
     }
     free(myName);
     fclose(inputFile);
   }
-  
 //--------------------------------------------------------------------
 //--- WRITING cities with population greater than or equal to 'popMin'
 //--------------------------------------------------------------------
 
-  printf("== Writing cities with population >= %i in 'resuCities.dat' ==\n", popMin);
+  printf("== Writing cities with population >= %i and department = %i in 'resuCities.dat' ==\n", popMin,dpt);
 
   FILE* outputFile = NULL;
   outputFile = fopen("resuCities.dat", "w");
@@ -124,9 +125,9 @@ ListOfCities* bigcitiesReader(){
     cities->lat  = malloc(cities->number*sizeof(float));
     
     // Reading/Saving data
-    int index=0;
+    int index = 0;
     int Dpt = 1;
-    int Pop = 100;
+    int popMax = 0;
     float Lon = 0.0;
     float Lat = 0.0;
     char Name[32];
@@ -148,8 +149,8 @@ ListOfCities* bigcitiesReader(){
       
       //the largest city of the province
       if (myDpt == Dpt){
-        if (myPop >= Pop){
-          Pop = myPop;
+        if (myPop >= popMax){
+          popMax = myPop;
           Lon = myLon;
           Lat = myLat;
           strcpy(Name, myName);
@@ -161,11 +162,11 @@ ListOfCities* bigcitiesReader(){
         cities->dpt[index] = Dpt;
         cities->name[index] = (char*) malloc(32*sizeof(char));
         strncpy(cities->name[index], Name, 32);
-        cities->pop[index] = Pop;
+        cities->pop[index] = popMax;
         cities->lon[index] = Lon;
         cities->lat[index] = Lat;
         index++;
-        Pop = 100;
+        popMax = 0;
         Lon = 0.0;
         Lat = 0.0;
         Dpt += 1;
@@ -191,7 +192,7 @@ ListOfCities* bigcitiesReader(){
         cities->dpt[index] = Dpt;
         cities->name[index] = (char*) malloc(32*sizeof(char));
         strncpy(cities->name[index], Name, 32);
-        cities->pop[index] = Pop;
+        cities->pop[index] = popMax;
         cities->lon[index] = Lon;
         cities->lat[index] = Lat;
       }
