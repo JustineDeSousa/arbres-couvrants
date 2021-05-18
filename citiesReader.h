@@ -1,8 +1,6 @@
 #ifndef CITIES_READER
 #define CITIES_READER
 
-//int R = 6378;
-
 typedef struct ListOfCities ListOfCities;
 
 struct ListOfCities
