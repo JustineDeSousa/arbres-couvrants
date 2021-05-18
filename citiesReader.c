@@ -72,7 +72,6 @@ ListOfCities* citiesReader(int popMin, int dpt){
         cities->pop[index] = myPop;
         cities->lon[index] = myLon;
         cities->lat[index] = myLat;
-        printf("%3i/%3i: %25s %2i %7i %9f %9f\n",index+1, cities->number, cities->name[index], cities->dpt[index], cities->pop[index], cities->lon[index], cities->lat[index]);
         index++;
       }
     }
