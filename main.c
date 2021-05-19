@@ -12,6 +12,8 @@
 #include <float.h>
 #include <math.h>
 
+#define max(a,b) (((a) > (b)) ? (a) : (b))
+
 
 int main() {
 
@@ -206,11 +208,11 @@ int main() {
           int villeMax = max(villeMax,max(villeA,villeB));
         }
       }
-      n += villeMax;
+      n += villeMax + 1;
     }
   }
 
-
+  
 
 
 
@@ -243,11 +245,7 @@ int main() {
   */
 
     /*
-  printf("       %25s %2s %6s  %9s %9s\n","VILLE","dpt","pop","longitude","latitude");
-  printf("----------------------------------------------------------------\n");
-  for(int i=0; i<cities->number; i++){
-    printf("%3i/%3i: %25s %2i %7i %9f %9f\n",i+1, cities->number, cities->name[i], cities->dpt[i], cities->pop[i], cities->lon[i], cities->lat[i]);
-  }
+ 
   */
 
 /*
