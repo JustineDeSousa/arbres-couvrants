@@ -223,6 +223,9 @@ ListOfCities* bigcitiesReader(){
 
 
 float poids(ListOfCities* cities, int a, int b){
+  if(a==b){
+    return 0;
+  }
   int R = 6378;
   float pi = 3.14;
   float conversion = pi/180;

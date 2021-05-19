@@ -24,6 +24,7 @@ int main() {
 
   ListOfCities* cities;
   float taille_reseau = 0;
+  int nb_villes = 0;
 
   for(int dpt = 1; dpt<95; dpt++){
 //-----------------------------------------------------------------
@@ -32,6 +33,7 @@ int main() {
     char outputFile[50];
     sprintf(outputFile,"resuCities_%d.dat",dpt);
     cities = citiesReader(popMin,dpt,outputFile);
+    nb_villes += cities->number;
 //-----------------------------------------------------------------
 //--- COMPUTING graph
 //----------------------------------------------------------------- 
@@ -85,11 +87,11 @@ int main() {
     }
     fclose(fileOut);
 
-  
+    float taille_reseau_dpt = 0;
     for(int i = 0; i < cities->number; i++){ 
-      taille_reseau += poids(cities,i,voisin[i]);
+      taille_reseau_dpt += poids(cities,i,voisin[i]);
     }
-    printf("taille reseau = %f\n",taille_reseau);
+    taille_reseau += taille_reseau_dpt;
   }
 
 
@@ -215,7 +217,7 @@ int main() {
 
 
   // ... just to check! This line can be removed.
-  printf("\n  cities: \n\n");
+  printf("\n %i cities: \n\n", nb_villes);
   printf("Taille du reseau: %1.0f km\n",taille_reseau);
   
 
