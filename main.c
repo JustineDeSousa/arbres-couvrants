@@ -23,7 +23,6 @@ int main() {
   ListOfCities* cities;
 
   for(int dpt = 1; dpt<95; dpt++){
-    printf("dpt %i\n",dpt);
 //-----------------------------------------------------------------
 //--- READING cities from departement = dpt
 //-----------------------------------------------------------------
@@ -87,49 +86,34 @@ int main() {
   }
 
 
-
-  
-
-
-
-  /*
-
-
-
-
-
-  ListOfCities* bigCities;                                  
-  bigCities = bigcitiesReader();  //read the largest cities of every provinces
-  
+//-----------------------------------------------------------------
+//--- READING bigger city from each departement
+//-----------------------------------------------------------------                             
+  cities = bigcitiesReader();
 //-----------------------------------------------------------------
 //--- COMPUTING graph
 //-----------------------------------------------------------------
-
-  //---------------------------------------------------------------
-  //--- Graph of bigCities
-  //---------------------------------------------------------------
-  
   // allocation des variables
-  bool* dansS = malloc(bigCities->number*sizeof(bool));
-  int* voisin = malloc(bigCities->number*sizeof(int));
-  float* dist = malloc(bigCities->number*sizeof(float));
+  bool* dansS = malloc(cities->number*sizeof(bool));
+  int* voisin = malloc(cities->number*sizeof(int));
+  float* dist = malloc(cities->number*sizeof(float));
 
   //Initialisation
   dansS[0] = true;  //On démarre du sommet 0
   dist[0] = 0;      //dist(0,0) = 0
-  for(int i = 0; i < bigCities->number; i++){
+  for(int i = 0; i < cities->number; i++){
     dansS[i] = false;
-    dist[i] = poids(bigCities,0,i);
+    dist[i] = poids(cities,0,i);
     voisin[i] = 0;
   }
-
+  
   //Itérations
   int k = 0;
-  while(k < bigCities->number - 2){
+  while(k < cities->number - 2){
     //Trouver i tels que (dansS[i]=false) et (dist[i] est minimal)
     float minDist = FLT_MAX;
     int i = 0;
-    for(int j = 1; j < bigCities->number; j++){
+    for(int j = 1; j < cities->number; j++){
       if( dansS[j] == false){
         if(dist[j] < minDist){
           minDist = dist[j];
@@ -139,33 +123,51 @@ int main() {
     }//minDist,min_i OK
     dansS[i] = true;
     
-    for(int j = 0; j < bigCities->number; j++){
+    for(int j = 0; j < cities->number; j++){
       if( dansS[j] == false ){
-        if( dist[j] > poids(bigCities,i,j) ){
-          dist[j] = poids(bigCities,i,j);
+        if( dist[j] > poids(cities,i,j) ){
+          dist[j] = poids(cities,i,j);
           voisin[j] = i;
         }
       }
     }
     k ++;
   }
-
-  // Écriture du graphe (chaque ligne correspond à une arête)
-  FILE* fileOut = fopen("resuGraphBigCities.dat", "w");
-  for(int i = 0; i<bigCities->number; i++){
+//-----------------------------------------------------------------
+//--- WRITING GRAPH for big cities
+//-----------------------------------------------------------------
+  FILE* fileOut = fopen("resuGraph_bigcities.dat", "w");
+  for(int i = 0; i<cities->number; i++){
     fprintf(fileOut, "%i %i\n", i, voisin[i]);
   }
   fclose(fileOut);
+  /*
 
   
-  //Calcul de la taille du réseau bigCities
+
+
+  //---------------------------------------------------------------
+  //--- Graph of cities
+  //---------------------------------------------------------------
+  
+  
+
+
+
+
+
+  // Écriture du graphe (chaque ligne correspond à une arête)
+
+
+  
+  //Calcul de la taille du réseau cities
   float taille_reseau_big_cities = 0;
-  for(int i = 0; i < bigCities->number; i++){ 
-    taille_reseau_big_cities += poids(bigCities,i,voisin[i]);
+  for(int i = 0; i < cities->number; i++){ 
+    taille_reseau_big_cities += poids(cities,i,voisin[i]);
   }
 
   // ... just to check! This line can be removed.
-  printf("\n %i cities: \n\n", bigCities->number);
+  printf("\n %i cities: \n\n", cities->number);
   printf("Taille du reseau: %1.0f km\n\n",taille_reseau_big_cities);
 
   */
@@ -173,8 +175,8 @@ int main() {
     /*
   printf("       %25s %2s %6s  %9s %9s\n","VILLE","dpt","pop","longitude","latitude");
   printf("----------------------------------------------------------------\n");
-  for(int i=0; i<bigCities->number; i++){
-    printf("%3i/%3i: %25s %2i %7i %9f %9f\n",i+1, bigCities->number, bigCities->name[i], bigCities->dpt[i], bigCities->pop[i], bigCities->lon[i], bigCities->lat[i]);
+  for(int i=0; i<cities->number; i++){
+    printf("%3i/%3i: %25s %2i %7i %9f %9f\n",i+1, cities->number, cities->name[i], cities->dpt[i], cities->pop[i], cities->lon[i], cities->lat[i]);
   }
   */
 
@@ -182,7 +184,7 @@ int main() {
   //---------------------------------------------------------------
   //---------------------------------------------------------------
 
-  //Calcul de la taille du réseau bigCities
+  //Calcul de la taille du réseau cities
   float taille_reseau = taille_reseau_big_cities + taille_reseau_citie6;
 
   // ... just to check! This line can be removed.
@@ -204,12 +206,12 @@ int main() {
   free(cities->lat);
   free(cities);
 /*
-  free(bigCities->dpt);
-  free(bigCities->name);
-  free(bigCities->pop);
-  free(bigCities->lon);
-  free(bigCities->lat);
-  free(bigCities);
+  free(cities->dpt);
+  free(cities->name);
+  free(cities->pop);
+  free(cities->lon);
+  free(cities->lat);
+  free(cities);
 */
 
 
