@@ -141,21 +141,91 @@ int main() {
     fprintf(fileOut, "%i %i\n", i, voisin[i]);
   }
   fclose(fileOut);
-  /*
+  
+
+//---------------------------------------------------------------
+//--- Réunion de tous les fichiers
+//---------------------------------------------------------------
+  FILE* outputFile = NULL;
+  outputFile = fopen("resuCities.dat","w");
+  
+  if(outputFile != NULL){
+    for(int dpt = 1; dpt < 95; dpt ++){
+      char filename[50];
+      sprintf(filename,"resuCities_%d.dat",dpt);
+      printf("== Merging cities file with population >= %i and department = %i from %s ==\n", popMin, dpt, filename);
+
+      FILE* inputFile = NULL;
+      inputFile = fopen(filename, "r");
+      
+      if(inputFile != NULL){
+        char line[512];
+        const char s[2] = " ";
+        char *token;
+      
+        while(fgets(line, 512, inputFile) != NULL){
+          token = strtok(line, s);
+          int myPop = atoi(token);
+          token = strtok(NULL, s);
+          float myLon = atof(token);
+          token = strtok(NULL, s);
+          float myLat = atof(token);
+
+          fprintf(outputFile, "%i %f %f\n", myPop, myLon, myLat);
+        }
+      }
+    }
+  }
+  
+  outputFile = NULL;
+  outputFile = fopen("resuGraph.dat","w");
+  
+  if(outputFile != NULL){
+    int n = 0;
+    int villeMax = 0;
+    for(int dpt = 1; dpt < 95; dpt ++){
+      char filename[50];
+      sprintf(filename,"resuGraph_%d.dat",dpt);
+      printf("== Merging graph file with population >= %i and department = %i from %s ==\n", popMin, dpt, filename);
+
+      FILE* inputFile = NULL;
+      inputFile = fopen(filename, "r");
+      
+      if(inputFile != NULL){
+        char line[512];
+        const char s[2] = " ";
+        char *token;
+        villeMax = 0;
+        while(fgets(line, 512, inputFile) != NULL){
+          token = strtok(line, s);
+          int villeA = atoi(token);
+          token = strtok(NULL, s);
+          int villeB = atoi(token);
+          fprintf(outputFile, "%i %i\n", villeA+n, villeB+n);
+
+          int villeMax = max(villeMax,max(villeA,villeB));
+        }
+      }
+      n += villeMax;
+    }
+  }
+
+
+
+
+
 
   
 
 
-  //---------------------------------------------------------------
-  //--- Graph of cities
-  //---------------------------------------------------------------
+
   
   
 
 
 
 
-
+/*
   // Écriture du graphe (chaque ligne correspond à une arête)
 
 
