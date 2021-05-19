@@ -23,6 +23,7 @@ int main() {
 
 
   ListOfCities* cities;
+  float taille_reseau = 0;
 
   for(int dpt = 1; dpt<95; dpt++){
 //-----------------------------------------------------------------
@@ -84,6 +85,10 @@ int main() {
     }
     fclose(fileOut);
 
+  
+    for(int i = 0; i < cities->number; i++){ 
+      taille_reseau += poids(cities,i,voisin[i]);
+    }
 
   }
 
@@ -144,6 +149,9 @@ int main() {
   }
   fclose(fileOut);
   
+  for(int i = 0; i < cities->number; i++){ 
+    taille_reseau += poids(cities,i,voisin[i]);
+  }
 
 //---------------------------------------------------------------
 //--- Réunion de tous les fichiers
@@ -200,45 +208,9 @@ int main() {
 
 
 
-  
-  
-
-
-
-
-/*
-  // Écriture du graphe (chaque ligne correspond à une arête)
-
-
-  
-  //Calcul de la taille du réseau cities
-  float taille_reseau_big_cities = 0;
-  for(int i = 0; i < cities->number; i++){ 
-    taille_reseau_big_cities += poids(cities,i,voisin[i]);
-  }
-
-  // ... just to check! This line can be removed.
-  printf("\n %i cities: \n\n", cities->number);
-  printf("Taille du reseau: %1.0f km\n\n",taille_reseau_big_cities);
-
-  */
-
-    /*
- 
-  */
-
-/*
-  //---------------------------------------------------------------
-  //---------------------------------------------------------------
-
-  //Calcul de la taille du réseau cities
-  float taille_reseau = taille_reseau_big_cities + taille_reseau_citie6;
-
   // ... just to check! This line can be removed.
   printf("\n  cities: \n\n");
   printf("Taille du reseau: %1.0f km\n",taille_reseau);
-
-  */
   
 
 
@@ -252,15 +224,6 @@ int main() {
   free(cities->lon);
   free(cities->lat);
   free(cities);
-/*
-  free(cities->dpt);
-  free(cities->name);
-  free(cities->pop);
-  free(cities->lon);
-  free(cities->lat);
-  free(cities);
-*/
-
 
   return 0;
 }

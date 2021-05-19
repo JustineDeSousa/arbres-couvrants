@@ -14,7 +14,7 @@ ListOfCities* citiesReader(int popMin, int dpt, char* filename){
 //--- and which department == 'dpt' (si dpt == 0, lit pour tous les dpt)
 //----------------------------------------------------------------------
 
-  printf("== Reading cities with population >= %i and department = %i from 'citiesList.csv' ==\n", popMin,dpt);
+  printf("== Reading cities with population >= %i and department = %i from 'citiesList.csv'    ==\n", popMin,dpt);
 
   FILE* inputFile = NULL;
   inputFile = fopen("citiesList.csv", "r");
