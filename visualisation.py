@@ -4,20 +4,22 @@
 from matplotlib import pyplot
 from numpy import loadtxt
 
+cities = loadtxt("resuBigCities.dat", dtype=float, delimiter=" ")
+
 # draw the graph big cities
-#graph = loadtxt("resuGraph_bigcities.dat", dtype=int)
-#print(graph.shape[0])
-#for x in range(graph.shape[0]):
-#  edge = [graph[x,0], graph[x,1]]
-#  pyplot.plot(cities[edge,1], cities[edge,2], 'b')
+graph = loadtxt("resuGraph_bigcities.dat", dtype=int)
+print(graph.shape[0])
+for x in range(graph.shape[0]):
+  edge = [graph[x,0], graph[x,1]]
+  pyplot.plot(cities[edge,1], cities[edge,2], 'b')
 
 
-# draw the citie per dpt
+# draw the cities
 cities = loadtxt("resuCities.dat", dtype=float, delimiter=" ")
 pyplot.scatter(cities[:,1], cities[:,2], s=cities[:,0]/1000, c=cities[:,0], alpha=0.5)
 
 
-# draw the graph per dpt
+# draw the graph
 graph = loadtxt("resuGraph.dat", dtype=int)
 for x in range(graph.shape[0]):
   edge = [graph[x,0], graph[x,1]]
