@@ -5,7 +5,7 @@
 #include <string.h>
 #include <math.h>
 
-ListOfCities* citiesReader(int popMin, int dpt){
+ListOfCities* citiesReader(int popMin, int dpt, char* filename){
 
   ListOfCities* cities = malloc(sizeof(ListOfCities));
 
@@ -82,10 +82,10 @@ ListOfCities* citiesReader(int popMin, int dpt){
 //--- WRITING cities with population greater than or equal to 'popMin'
 //--------------------------------------------------------------------
 
-  printf("== Writing cities with population >= %i and department = %i in 'resuCities.dat' ==\n", popMin,dpt);
+  printf("== Writing cities with population >= %i and department = %i in '%s' ==\n", popMin,dpt,filename);
 
   FILE* outputFile = NULL;
-  outputFile = fopen("resuCitiesdpt.dat", "w");
+  outputFile = fopen(filename, "w");
   if(outputFile != NULL){
     for(int i=0; i<cities->number; i++){
       fprintf(outputFile, "%i %f %f\n", cities->pop[i], cities->lon[i], cities->lat[i]);
