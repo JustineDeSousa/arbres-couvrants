@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include <float.h>
 #include <math.h>
+#include <time.h>
 
 #define max(a,b) (((a) > (b)) ? (a) : (b))
 
@@ -25,6 +26,7 @@ int main() {
   ListOfCities* cities;
   float taille_reseau = 0;
   int nb_villes = 0;
+  float time = 0;
 
   for(int dpt = 1; dpt<95; dpt++){
 //-----------------------------------------------------------------
@@ -37,6 +39,7 @@ int main() {
 //-----------------------------------------------------------------
 //--- COMPUTING graph
 //----------------------------------------------------------------- 
+    clock_t t0 = clock();
     // allocation des variables
     bool* dansS = malloc(cities->number*sizeof(bool));
     int* voisin = malloc(cities->number*sizeof(int));
@@ -92,6 +95,13 @@ int main() {
       taille_reseau_dpt += poids(cities,i,voisin[i]);
     }
     taille_reseau += taille_reseau_dpt;
+    
+    free(dansS);
+    free(voisin);
+    free(dist);
+    
+    clock_t t1 = clock();
+    time += (t1-t0)/CLOCKS_PER_SEC;
   }
 
 
@@ -102,6 +112,8 @@ int main() {
 //-----------------------------------------------------------------
 //--- COMPUTING graph
 //-----------------------------------------------------------------
+  
+  clock_t t2 = clock();
   // allocation des variables
   bool* dansS = malloc(cities->number*sizeof(bool));
   int* voisin = malloc(cities->number*sizeof(int));
@@ -154,6 +166,14 @@ int main() {
   for(int i = 0; i < cities->number; i++){ 
     taille_reseau += poids(cities,i,voisin[i]);
   }
+  
+  free(dansS);
+  free(voisin);
+  free(dist);
+  
+  clock_t t3 = clock();
+  float duration = (float)(t3 - t2) / CLOCKS_PER_SEC + time;
+  printf("time is %f second\n ",duration);
 
 //---------------------------------------------------------------
 //--- Réunion de tous les fichiers
