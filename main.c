@@ -89,7 +89,7 @@ int main() {
     for(int i = 0; i < cities->number; i++){ 
       taille_reseau += poids(cities,i,voisin[i]);
     }
-
+    printf("taille reseau = %f\n",taille_reseau);
   }
 
 
@@ -169,8 +169,8 @@ int main() {
       sprintf(citiesFilename,"resuCities_%d.dat",dpt);
       char graphFilename[50];
       sprintf(graphFilename,"resuGraph_%d.dat",dpt);
-      printf("== Merging cities file with population >= %i and department = %i from %s ==\n", popMin, dpt, citiesFilename);
-      printf("== Merging graph  file with population >= %i and department = %i from %s ==\n", popMin, dpt, graphFilename);
+      //printf("== Merging cities file with population >= %i and department = %i from %s ==\n", popMin, dpt, citiesFilename);
+      //printf("== Merging graph  file with population >= %i and department = %i from %s ==\n", popMin, dpt, graphFilename);
 
       FILE* citiesInputFile = NULL;
       citiesInputFile = fopen(citiesFilename, "r");
@@ -203,6 +203,12 @@ int main() {
         }
       }
       n += nbVilles;
+      if (remove(citiesFilename) != 0) {
+        printf("The file %s is not deleted.",citiesFilename);
+      }
+      if (remove(graphFilename) != 0) {
+        printf("The file %s is not deleted.",graphFilename);
+      }
     }
   }
 
