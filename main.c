@@ -148,24 +148,34 @@ int main() {
 //---------------------------------------------------------------
 //--- Réunion de tous les fichiers
 //---------------------------------------------------------------
-  FILE* outputFile = NULL;
-  outputFile = fopen("resuCities.dat","w");
+  FILE* citiesOutputFile = NULL;
+  citiesOutputFile = fopen("resuCities.dat","w");
+  FILE* graphOutputFile = NULL;
+  graphOutputFile = fopen("resuGraph.dat","w");
   
-  if(outputFile != NULL){
+  if(citiesOutputFile != NULL && graphOutputFile != NULL){
+    int n = 0;
+    int nbVilles = 0;
     for(int dpt = 1; dpt < 95; dpt ++){
-      char filename[50];
-      sprintf(filename,"resuCities_%d.dat",dpt);
-      printf("== Merging cities file with population >= %i and department = %i from %s ==\n", popMin, dpt, filename);
+      char citiesFilename[50];
+      sprintf(citiesFilename,"resuCities_%d.dat",dpt);
+      char graphFilename[50];
+      sprintf(graphFilename,"resuGraph_%d.dat",dpt);
+      printf("== Merging cities file with population >= %i and department = %i from %s ==\n", popMin, dpt, citiesFilename);
+      printf("== Merging graph  file with population >= %i and department = %i from %s ==\n", popMin, dpt, graphFilename);
 
-      FILE* inputFile = NULL;
-      inputFile = fopen(filename, "r");
+      FILE* citiesInputFile = NULL;
+      citiesInputFile = fopen(citiesFilename, "r");
+      FILE* graphInputFile = NULL;
+      graphInputFile = fopen(graphFilename, "r");
       
-      if(inputFile != NULL){
+      if(citiesInputFile != NULL && graphInputFile != NULL){
         char line[512];
         const char s[2] = " ";
         char *token;
-      
-        while(fgets(line, 512, inputFile) != NULL){
+
+        nbVilles = 0;
+        while(fgets(line, 512, citiesInputFile) != NULL){
           token = strtok(line, s);
           int myPop = atoi(token);
           token = strtok(NULL, s);
@@ -173,51 +183,20 @@ int main() {
           token = strtok(NULL, s);
           float myLat = atof(token);
 
-          fprintf(outputFile, "%i %f %f\n", myPop, myLon, myLat);
+          fprintf(citiesOutputFile, "%i %f %f\n", myPop, myLon, myLat);
+          nbVilles ++;
         }
-      }
-    }
-  }
-  
-  outputFile = NULL;
-  outputFile = fopen("resuGraph.dat","w");
-  
-  if(outputFile != NULL){
-    int n = 0;
-    int villeMax = 0;
-    for(int dpt = 1; dpt < 95; dpt ++){
-      char filename[50];
-      sprintf(filename,"resuGraph_%d.dat",dpt);
-      printf("== Merging graph file with population >= %i and department = %i from %s ==\n", popMin, dpt, filename);
-
-      FILE* inputFile = NULL;
-      inputFile = fopen(filename, "r");
-      
-      if(inputFile != NULL){
-        char line[512];
-        const char s[2] = " ";
-        char *token;
-        villeMax = 0;
-        while(fgets(line, 512, inputFile) != NULL){
+        while(fgets(line, 512, graphInputFile) != NULL){
           token = strtok(line, s);
           int villeA = atoi(token);
           token = strtok(NULL, s);
           int villeB = atoi(token);
-          fprintf(outputFile, "%i %i\n", villeA+n, villeB+n);
-
-          int villeMax = max(villeMax,max(villeA,villeB));
+          fprintf(graphOutputFile, "%i %i\n", villeA+n, villeB+n);
         }
       }
-      n += villeMax + 1;
+      n += nbVilles;
     }
   }
-
-  
-
-
-
-
-  
 
 
 

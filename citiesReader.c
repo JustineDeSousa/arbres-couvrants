@@ -82,7 +82,7 @@ ListOfCities* citiesReader(int popMin, int dpt, char* filename){
 //--- WRITING cities with population greater than or equal to 'popMin'
 //--------------------------------------------------------------------
 
-  printf("== Writing cities with population >= %i and department = %i in '%s' ==\n", popMin,dpt,filename);
+  printf("== Writing cities with population >= %i and department = %i in   '%s' ==\n", popMin,dpt,filename);
 
   FILE* outputFile = NULL;
   outputFile = fopen(filename, "w");
@@ -206,7 +206,7 @@ ListOfCities* bigcitiesReader(){
 //--- WRITING largest cities of every provinces
 //--------------------------------------------------------------------
 
-  printf("== Writing largest cities of every provinces in 'resuBigCities.dat' ==\n");
+  printf("== Writing largest cities of every provinces in   'resuBigCities.dat' ==\n");
 
   FILE* outputFile = NULL;
   outputFile = fopen("resuBigCities.dat", "w");
