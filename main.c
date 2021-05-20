@@ -1,5 +1,5 @@
 // Compilation:
-//   icc -std=c99 main.c citiesReader.c
+//   icc -mkl -std=c99 main.c citiesReader.c
 // Execution:
 //   ./a.out
 
@@ -109,7 +109,7 @@ int main() {
     mkl_get_cpu_clocks(&t1);
     time += (double)(t1-t0)/mkl_get_clocks_frequency();
 
-    
+
   }
 
 
@@ -189,7 +189,7 @@ int main() {
   unsigned MKL_INT64 t3;
   mkl_get_cpu_clocks(&t3);
   //TEMPS DE CALCUL TOTAL
-  double duration = (double)(t3 - t2) / mkl_get_clocks_frequency + time;
+  double duration = (double)(t3 - t2 + time)/mkl_get_clocks_frequency()/1e9;
   printf("time is %f second\n ",duration);
 
 //---------------------------------------------------------------
