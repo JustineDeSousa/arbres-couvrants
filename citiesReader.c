@@ -107,7 +107,7 @@ ListOfCities* bigcitiesReader(){
 //--- READING the largest city of every provinces
 //--------------------------------------------------------------------
 
-  printf("== Reading the biggest city of every province ==\n");
+  //printf("== Reading the biggest city of every province ==\n");
   FILE* inputFile = NULL;
   inputFile = fopen("citiesList.csv", "r");
   if(inputFile != NULL){
@@ -206,7 +206,7 @@ ListOfCities* bigcitiesReader(){
 //--- WRITING largest cities of every provinces
 //--------------------------------------------------------------------
 
-  printf("== Writing largest cities of every provinces in   'resuBigCities.dat' ==\n");
+  //printf("== Writing largest cities of every provinces in   'resuBigCities.dat' ==\n");
 
   FILE* outputFile = NULL;
   outputFile = fopen("resuBigCities.dat", "w");

@@ -173,7 +173,6 @@ int main() {
   mkl_get_cpu_clocks(&t3);
   //TEMPS DE CALCUL TOTAL
   double duration = (double)(t3 - t2 + time)/mkl_get_clocks_frequency()/1e9;
-  printf("time is %f second\n ",duration);
 
 //-----------------------------------------------------------------
 //--- WRITING GRAPH for big cities
@@ -263,8 +262,9 @@ int main() {
 //--- FICHIERS DPT REUNIS DANS resuGraph.dat et resuCities.dat
 //-----------------------------------------------------------------
 
-  printf("\n %i cities: \n\n", nb_villes);
+  printf("\t%i cities: \n", nb_villes);
   printf("Taille du reseau: %1.0f km\n",taille_reseau);
+  printf("Time is %fs\n ",duration);
 
   return 0;
 }
