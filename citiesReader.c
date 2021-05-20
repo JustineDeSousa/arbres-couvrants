@@ -227,14 +227,3 @@ ListOfCities* bigcitiesReader(){
   return cities;
 
 }
-
-
-float poids(ListOfCities* cities, int a, int b){
-  if(a==b){
-    return 0;
-  }
-  int R = 6378;
-  float pi = 3.14;
-  float conversion = pi/180;
-  return R*acos( sin(cities->lat[a] * conversion)*sin(cities->lat[b]*conversion) + cos((cities->lon[a] - cities->lon[b])*conversion)*cos(cities->lat[a]*conversion)*cos(cities->lat[b]*conversion) );
-}

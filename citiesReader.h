@@ -1,6 +1,8 @@
 #ifndef CITIES_READER
 #define CITIES_READER
 
+
+
 typedef struct ListOfCities ListOfCities;
 
 struct ListOfCities
@@ -15,7 +17,5 @@ struct ListOfCities
 
 ListOfCities* citiesReader(int popMin, int dpt,char* filename);
 ListOfCities* bigcitiesReader();
-
-float poids(ListOfCities* cities, int a, int b);
 
 #endif

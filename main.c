@@ -14,6 +14,17 @@
 #include <math.h>
 #include <mkl.h>
 
+#define R 6378
+#define pi 3.14
+#define conversion pi/180
+
+inline float poids(ListOfCities* cities, int a, int b){
+  if(a==b){
+    return 0;
+  }
+  return R*acos( sin(cities->lat[a] * conversion)*sin(cities->lat[b]*conversion) + cos((cities->lon[a] - cities->lon[b])*conversion)*cos(cities->lat[a]*conversion)*cos(cities->lat[b]*conversion) );
+}
+
 int main() {
 
   int popMin;
@@ -49,9 +60,10 @@ int main() {
     //Initialisation
     dansS[0] = true;  //On démarre du sommet 0
     dist[0] = 0;      //dist(0,0) = 0
+
     for(int i = 0; i < cities->number; i++){
       dansS[i] = false;
-      dist[i] = poids(cities,0,i);
+      dist[i] = R*acos( sin(cities->lat[0] * conversion)*sin(cities->lat[i]*conversion) + cos((cities->lon[0] - cities->lon[i])*conversion)*cos(cities->lat[0]*conversion)*cos(cities->lat[i]*conversion) );
       voisin[i] = 0;
     }
     //Itérations
