@@ -1,5 +1,6 @@
 // Compilation:
-//   icc -mkl -std=c99 main.c citiesReader.c
+//    icc -std=c99 -mkl main.c citiesReader.c
+//    icc -std=c99 -mkl -qopt-report=1 -qopt-report-annotate=html main.c citiesReader.c
 // Execution:
 //   ./a.out
 
