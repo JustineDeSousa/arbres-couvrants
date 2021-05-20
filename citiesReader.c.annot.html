@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Annotated source listing for\/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c</title>
+<style>
+*{margin:0;padding:0}body,html{color:#000;background:#fff;height:100%;width:100%;font-family:"Lucida Sans Unicode","Lucida Grande",sans-serif;overflow:hidden}.header{position:absolute;top:0;height:50px;width:100%;background:#0071c5;color:#fff}.content{position:absolute;left:0;right:0;width:75%;top:50px;bottom:40px;margin:0 auto}.content .inner_header{height:30px;background:#ddd}.content .scrollable_right{position:absolute;left:300px;bottom:0;top:30px;right:0;overflow-y:scroll;padding:3px 5px}.content .scrollable_left{overflow-y:scroll;position:absolute;width:285px;top:30px;bottom:0;padding:3px 5px;border-left:thick solid #ddd}.footer{position:absolute;bottom:0;height:40px;width:100%;background:#0071c5;text-align:center;color:#fff}.header .title{position:relative;padding:7px 5px;left:12.5%;color:#fff;font-size:20px;font-weight:bolder;text-shadow:1px 1px #000}.content .title{padding:3px 5px;color:#0071c5;font-size:14px;font-weight:bolder}.footer .title{padding:10px;font-size:12px}.content .scrollable_left .annot_link{font-size:14px;color:#0071c5}.content .scrollable_left .annot_link:visited {color:purple;text-decoration:underline;}.footnote{color: #0071c5;}</style>
+</head>
+<body>
+<div class="header">
+<div class="title">Annotated source listing with compiler optimization reports</div>
+</div>
+<div class="content">
+<div class="inner_header">
+<div class="title">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c
+</div>
+</div><div class="scrollable_left"><h5 style="color:#032640">Routines with optimization reports</h5><a class="annot_link" href="#l8">citiesReader(int,&nbsp;int,&nbsp;char&nbsp;*)</a><br/><a class="annot_link" href="#l109">bigcitiesReader()</a><br/><a class="annot_link" href="#l232">poids(ListOfCities&nbsp;*,&nbsp;int,&nbsp;int)</a><br/></div><div class="scrollable_right" id="code_layout">
+ <pre style="border-width:0px;"><a id="l1">1	#include "citiesReader.h"
+</a><a id="l2">2	
+</a><a id="l3">3	#include &lt;stdlib.h&gt;
+</a><a id="l4">4	#include &lt;stdio.h&gt;
+</a><a id="l5">5	#include &lt;string.h&gt;
+</a><a id="l6">6	#include &lt;math.h&gt;
+</a><a id="l7">7	
+</a><a id="l8">8	ListOfCities* citiesReader(int popMin, int dpt, char* filename){
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+INLINE REPORT: (citiesReader(int, int, char *))
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l32">(32,19)</a> atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l36">(36,19)</a> atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l59">(59,19)</a> atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l64">(64,17)</a> atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l68">(68,17)</a> atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l71">(71,21)</a> atof(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l73">(73,21)</a> atof(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+
+<a class="annot_link" href="citiesReader.c.annot.html#l8">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(8,64)</a>:remark #34051: REGISTER ALLOCATION : [citiesReader] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c:8
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   15[ rax rdx rcx rbx rbp rsi rdi r8-r9 r12-r15 zmm0-zmm1]
+        
+    Routine temporaries
+        Total         :     216
+            Global    :      81
+            Local     :     135
+        Regenerable   :      64
+        Spilled       :      15
+        
+    Routine stack
+        Variables     :     514 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       1 [0.00e+00 ~ 0.0%]
+        Spills        :      88 bytes*
+            Reads     :      29 [0.00e+00 ~ 0.0%]
+            Writes    :      26 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+</pre>
+<pre style="border-width:0px;"><a id="l9">9	
+</a><a id="l10">10	  ListOfCities* cities = malloc(sizeof(ListOfCities));
+</a><a id="l11">11	
+</a><a id="l12">12	//----------------------------------------------------------------------
+</a><a id="l13">13	//--- READING cities with population greater than or equal to 'popMin'
+</a><a id="l14">14	//--- and which department == 'dpt' (si dpt == 0, lit pour tous les dpt)
+</a><a id="l15">15	//----------------------------------------------------------------------
+</a><a id="l16">16	
+</a><a id="l17">17	  //printf("== Reading cities with population &gt;= %i and department = %i from 'citiesList.csv'    ==\n", popMin,dpt);
+</a><a id="l18">18	
+</a><a id="l19">19	  FILE* inputFile = NULL;
+</a><a id="l20">20	  inputFile = fopen("citiesList.csv", "r");
+</a><a id="l21">21	  if(inputFile != NULL){
+</a><a id="l22">22	
+</a><a id="l23">23	    char line[512];
+</a><a id="l24">24	    const char s[2] = ",";
+</a><a id="l25">25	    char *token;
+</a><a id="l26">26	    
+</a><a id="l27">27	    // Count the number of cities with population greater than or equal to 'popMin'
+</a><a id="l28">28	    cities-&gt;number = 0;
+</a><a id="l29">29	    while(fgets(line, 512, inputFile) != NULL){
+</a><a id="l30">30	      token = strtok(line, s);
+</a><a id="l31">31	      token = strtok(NULL, s);
+</a><a id="l32">32	      int myDpt = atoi(token);
+</a><a id="l33">33	      for(int i=0; i&lt;13; i++){
+</a><a id="l34">34	        token = strtok(NULL, s);
+</a><a id="l35">35	      }
+</a><a id="l36">36	      int myPop = atoi(token);
+</a><a id="l37">37	      if( ((myDpt == dpt) || (dpt==0)) && myPop &gt;= popMin){
+</a><a id="l38">38	        cities-&gt;number++;  
+</a><a id="l39">39	      }
+</a><a id="l40">40	      
+</a><a id="l41">41	    }
+</a><a id="l42">42	    fseek(inputFile, 0, SEEK_SET);
+</a><a id="l43">43	
+</a><a id="l44">44	    // Allocate arrays
+</a><a id="l45">45	    cities-&gt;dpt  = malloc(cities-&gt;number*sizeof(int));
+</a><a id="l46">46	    cities-&gt;name = malloc(cities-&gt;number*sizeof(char*));
+</a><a id="l47">47	    cities-&gt;pop  = malloc(cities-&gt;number*sizeof(int));
+</a><a id="l48">48	    cities-&gt;lon  = malloc(cities-&gt;number*sizeof(float));
+</a><a id="l49">49	    cities-&gt;lat  = malloc(cities-&gt;number*sizeof(float));
+</a><a id="l50">50	    
+</a><a id="l51">51	    // Reading/Saving data
+</a><a id="l52">52	    int index = 0;
+</a><a id="l53">53	    int myPop = 0;
+</a><a id="l54">54	    char *myName = malloc(32*sizeof(char));
+</a><a id="l55">55	    while(fgets(line, 512, inputFile) != NULL){
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+
+LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l55">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(55,5)</a>
+   remark #25460: No loop optimizations reported
+
+   LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l63">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(63,9)</a>
+      remark #25460: No loop optimizations reported
+   LOOP END
+
+   LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l67">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(67,9)</a>
+      remark #25460: No loop optimizations reported
+   LOOP END
+
+   LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l70">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(70,7)</a>
+      remark #25436: completely unrolled by 5  
+   LOOP END
+
+   LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l60">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(60,7)</a>
+      remark #25436: completely unrolled by 2  
+   LOOP END
+LOOP END
+</pre>
+<pre style="border-width:0px;"><a id="l56">56	      //printf("%s\n",line);
+</a><a id="l57">57	      token = strtok(line, s);
+</a><a id="l58">58	      token = strtok(NULL, s);
+</a><a id="l59">59	      int myDpt = atoi(token);
+</a><a id="l60">60	      for(int i=0; i&lt;2;  i++) token = strtok(NULL, s);
+</a><a id="l61">61	      strncpy(myName, token, 32);
+</a><a id="l62">62	      if (strcmp(myName,"Y")==0){
+</a><a id="l63">63	        for(int i=0; i&lt;10; i++) token = strtok(NULL, s);
+</a><a id="l64">64	        myPop = atoi(token);
+</a><a id="l65">65	      }
+</a><a id="l66">66	      else{
+</a><a id="l67">67	        for(int i=0; i&lt;11; i++) token = strtok(NULL, s);
+</a><a id="l68">68	        myPop = atoi(token);
+</a><a id="l69">69	      }
+</a><a id="l70">70	      for(int i=0; i&lt;5;  i++) token = strtok(NULL, s);
+</a><a id="l71">71	      float myLon = atof(token);
+</a><a id="l72">72	      for(int i=0; i&lt;1;  i++) token = strtok(NULL, s);
+</a><a id="l73">73	      float myLat = atof(token);
+</a><a id="l74">74	      
+</a><a id="l75">75	      if( ((myDpt == dpt)||(dpt == 0)) && (myPop &gt;= popMin) ){
+</a><a id="l76">76	        cities-&gt;dpt[index] = myDpt;
+</a><a id="l77">77	        cities-&gt;name[index] = (char*) malloc(32*sizeof(char));
+</a><a id="l78">78	        strncpy(cities-&gt;name[index], myName, 32);
+</a><a id="l79">79	        cities-&gt;pop[index] = myPop;
+</a><a id="l80">80	        cities-&gt;lon[index] = myLon;
+</a><a id="l81">81	        cities-&gt;lat[index] = myLat;
+</a><a id="l82">82	        index++;
+</a><a id="l83">83	      }
+</a><a id="l84">84	    }
+</a><a id="l85">85	    free(myName);
+</a><a id="l86">86	    fclose(inputFile);
+</a><a id="l87">87	  }
+</a><a id="l88">88	//--------------------------------------------------------------------
+</a><a id="l89">89	//--- WRITING cities with population greater than or equal to 'popMin'
+</a><a id="l90">90	//--------------------------------------------------------------------
+</a><a id="l91">91	
+</a><a id="l92">92	  //printf("== Writing cities with population &gt;= %i and department = %i in   '%s' ==\n", popMin,dpt,filename);
+</a><a id="l93">93	
+</a><a id="l94">94	  FILE* outputFile = NULL;
+</a><a id="l95">95	  outputFile = fopen(filename, "w");
+</a><a id="l96">96	  if(outputFile != NULL){
+</a><a id="l97">97	    for(int i=0; i&lt;cities-&gt;number; i++){
+</a><a id="l98">98	      fprintf(outputFile, "%i %f %f\n", cities-&gt;pop[i], cities-&gt;lon[i], cities-&gt;lat[i]);
+</a><a id="l99">99	    }
+</a><a id="l100">100	    fclose(outputFile);
+</a><a id="l101">101	  }
+</a><a id="l102">102	
+</a><a id="l103">103	  return cities;
+</a><a id="l104">104	}
+</a><a id="l105">105	
+</a><a id="l106">106	
+</a><a id="l107">107	
+</a><a id="l108">108	
+</a><a id="l109">109	ListOfCities* bigcitiesReader(){
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+INLINE REPORT: (bigcitiesReader())
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l148">(148,19)</a> atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l152">(152,19)</a> atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l154">(154,21)</a> atof(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l156">(156,21)</a> atof(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+
+<a class="annot_link" href="citiesReader.c.annot.html#l109">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(109,32)</a>:remark #34051: REGISTER ALLOCATION : [bigcitiesReader] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c:109
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   17[ rax rdx rcx rbx rbp rsi rdi r8-r10 r12-r15 zmm0-zmm2]
+        
+    Routine temporaries
+        Total         :     204
+            Global    :      69
+            Local     :     135
+        Regenerable   :      65
+        Spilled       :      18
+        
+    Routine stack
+        Variables     :     556 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       4 [0.00e+00 ~ 0.0%]
+        Spills        :     136 bytes*
+            Reads     :      40 [0.00e+00 ~ 0.0%]
+            Writes    :      35 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+</pre>
+<pre style="border-width:0px;"><a id="l110">110	
+</a><a id="l111">111	  ListOfCities* cities = malloc(sizeof(ListOfCities));
+</a><a id="l112">112	
+</a><a id="l113">113	//--------------------------------------------------------------------
+</a><a id="l114">114	//--- READING the largest city of every provinces
+</a><a id="l115">115	//--------------------------------------------------------------------
+</a><a id="l116">116	
+</a><a id="l117">117	  //printf("== Reading the biggest city of every province ==\n");
+</a><a id="l118">118	  FILE* inputFile = NULL;
+</a><a id="l119">119	  inputFile = fopen("citiesList.csv", "r");
+</a><a id="l120">120	  if(inputFile != NULL){
+</a><a id="l121">121	
+</a><a id="l122">122	    char line[512];
+</a><a id="l123">123	    const char s[2] = ",";
+</a><a id="l124">124	    char *token;
+</a><a id="l125">125	    
+</a><a id="l126">126	    cities-&gt;number = 94; //There are 94 provinces in the interior of France
+</a><a id="l127">127	
+</a><a id="l128">128	    // Allocate arrays
+</a><a id="l129">129	    cities-&gt;dpt  = malloc(cities-&gt;number*sizeof(int));
+</a><a id="l130">130	    cities-&gt;name = malloc(cities-&gt;number*sizeof(char*));
+</a><a id="l131">131	    cities-&gt;pop  = malloc(cities-&gt;number*sizeof(int));
+</a><a id="l132">132	    cities-&gt;lon  = malloc(cities-&gt;number*sizeof(float));
+</a><a id="l133">133	    cities-&gt;lat  = malloc(cities-&gt;number*sizeof(float));
+</a><a id="l134">134	    
+</a><a id="l135">135	    // Reading/Saving data
+</a><a id="l136">136	    int index = 0;
+</a><a id="l137">137	    int Dpt = 1;
+</a><a id="l138">138	    int popMax = 0;
+</a><a id="l139">139	    float Lon = 0.0;
+</a><a id="l140">140	    float Lat = 0.0;
+</a><a id="l141">141	    char Name[32];
+</a><a id="l142">142	    char lastcity[10];
+</a><a id="l143">143	    strcpy(lastcity,"FOSSES"); //the last city of the list
+</a><a id="l144">144	    char *myName = malloc(32*sizeof(char));
+</a><a id="l145">145	    while(fgets(line, 512, inputFile) != NULL){
+</a><a id="l146">146	      token = strtok(line, s);
+</a><a id="l147">147	      token = strtok(NULL, s);
+</a><a id="l148">148	      int myDpt = atoi(token);
+</a><a id="l149">149	      for(int i=0; i&lt;2;  i++) token = strtok(NULL, s);
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+
+LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l149">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(149,7)</a>
+   remark #25436: completely unrolled by 2  
+LOOP END
+</pre>
+<pre style="border-width:0px;"><a id="l150">150	      strncpy(myName, token, 32);
+</a><a id="l151">151	      for(int i=0; i&lt;11; i++) token = strtok(NULL, s);
+</a><a id="l152">152	      int myPop = atoi(token);
+</a><a id="l153">153	      for(int i=0; i&lt;5;  i++) token = strtok(NULL, s);
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+
+LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l153">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(153,7)</a>
+   remark #25436: completely unrolled by 5  
+LOOP END
+</pre>
+<pre style="border-width:0px;"><a id="l154">154	      float myLon = atof(token);
+</a><a id="l155">155	      for(int i=0; i&lt;1;  i++) token = strtok(NULL, s);
+</a><a id="l156">156	      float myLat = atof(token);
+</a><a id="l157">157	      
+</a><a id="l158">158	      //the largest city of the province
+</a><a id="l159">159	      if (myDpt == Dpt){
+</a><a id="l160">160	        if (myPop &gt;= popMax){
+</a><a id="l161">161	          popMax = myPop;
+</a><a id="l162">162	          Lon = myLon;
+</a><a id="l163">163	          Lat = myLat;
+</a><a id="l164">164	          strcpy(Name, myName);
+</a><a id="l165">165	        }
+</a><a id="l166">166	      }
+</a><a id="l167">167	
+</a><a id="l168">168	      //put the detail of the largest city of the province in the list
+</a><a id="l169">169	      if (myDpt != Dpt){
+</a><a id="l170">170	        cities-&gt;dpt[index] = Dpt;
+</a><a id="l171">171	        cities-&gt;name[index] = (char*) malloc(32*sizeof(char));
+</a><a id="l172">172	        strncpy(cities-&gt;name[index], Name, 32);
+</a><a id="l173">173	        cities-&gt;pop[index] = popMax;
+</a><a id="l174">174	        cities-&gt;lon[index] = Lon;
+</a><a id="l175">175	        cities-&gt;lat[index] = Lat;
+</a><a id="l176">176	        index++;
+</a><a id="l177">177	        popMax = 0;
+</a><a id="l178">178	        Lon = 0.0;
+</a><a id="l179">179	        Lat = 0.0;
+</a><a id="l180">180	        Dpt += 1;
+</a><a id="l181">181	        if (Dpt == 20){
+</a><a id="l182">182	          Dpt += 1;
+</a><a id="l183">183	        }
+</a><a id="l184">184	      }
+</a><a id="l185">185	      
+</a><a id="l186">186	      // read the detail of Paris
+</a><a id="l187">187	      if (myDpt == 75){
+</a><a id="l188">188	        cities-&gt;dpt[index] = myDpt;
+</a><a id="l189">189	        cities-&gt;name[index] = (char*) malloc(32*sizeof(char));
+</a><a id="l190">190	        strncpy(cities-&gt;name[index], myName, 32);
+</a><a id="l191">191	        cities-&gt;pop[index] = myPop;
+</a><a id="l192">192	        cities-&gt;lon[index] = myLon;
+</a><a id="l193">193	        cities-&gt;lat[index] = myLat;
+</a><a id="l194">194	        index++;
+</a><a id="l195">195	        Dpt++;
+</a><a id="l196">196	      }
+</a><a id="l197">197	
+</a><a id="l198">198	      //if all the cities has been read
+</a><a id="l199">199	      if (strcmp(lastcity,myName)==0){
+</a><a id="l200">200	        cities-&gt;dpt[index] = Dpt;
+</a><a id="l201">201	        cities-&gt;name[index] = (char*) malloc(32*sizeof(char));
+</a><a id="l202">202	        strncpy(cities-&gt;name[index], Name, 32);
+</a><a id="l203">203	        cities-&gt;pop[index] = popMax;
+</a><a id="l204">204	        cities-&gt;lon[index] = Lon;
+</a><a id="l205">205	        cities-&gt;lat[index] = Lat;
+</a><a id="l206">206	      }
+</a><a id="l207">207	    }
+</a><a id="l208">208	    free(myName);
+</a><a id="l209">209	    fclose(inputFile);
+</a><a id="l210">210	  }
+</a><a id="l211">211	
+</a><a id="l212">212	//--------------------------------------------------------------------
+</a><a id="l213">213	//--- WRITING largest cities of every provinces
+</a><a id="l214">214	//--------------------------------------------------------------------
+</a><a id="l215">215	
+</a><a id="l216">216	  //printf("== Writing largest cities of every provinces in   'resuBigCities.dat' ==\n");
+</a><a id="l217">217	
+</a><a id="l218">218	  FILE* outputFile = NULL;
+</a><a id="l219">219	  outputFile = fopen("resuBigCities.dat", "w");
+</a><a id="l220">220	  if(outputFile != NULL){
+</a><a id="l221">221	    for(int i=0; i&lt;cities-&gt;number; i++){
+</a><a id="l222">222	      fprintf(outputFile, "%i %f %f\n", cities-&gt;pop[i], cities-&gt;lon[i], cities-&gt;lat[i]);
+</a><a id="l223">223	    }
+</a><a id="l224">224	    fclose(outputFile);
+</a><a id="l225">225	  }
+</a><a id="l226">226	
+</a><a id="l227">227	  return cities;
+</a><a id="l228">228	
+</a><a id="l229">229	}
+</a><a id="l230">230	
+</a><a id="l231">231	
+</a><a id="l232">232	float poids(ListOfCities* cities, int a, int b){
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+INLINE REPORT: (poids(ListOfCities *, int, int))
+
+<a class="annot_link" href="citiesReader.c.annot.html#l232">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(232,48)</a>:remark #34051: REGISTER ALLOCATION : [poids] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c:232
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   10[ rax rdx rbx rsi rdi r13-r15 zmm0-zmm1]
+        
+    Routine temporaries
+        Total         :      50
+            Global    :      24
+            Local     :      26
+        Regenerable   :       1
+        Spilled       :       8
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :      32 bytes*
+            Reads     :       4 [4.71e+00 ~ 4.7%]
+            Writes    :       4 [4.71e+00 ~ 4.7%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+</pre>
+<pre style="border-width:0px;"><a id="l233">233	  if(a==b){
+</a><a id="l234">234	    return 0;
+</a><a id="l235">235	  }
+</a><a id="l236">236	  int R = 6378;
+</a><a id="l237">237	  float pi = 3.14;
+</a><a id="l238">238	  float conversion = pi/180;
+</a><a id="l239">239	  return R*acos( sin(cities-&gt;lat[a] * conversion)*sin(cities-&gt;lat[b]*conversion) + cos((cities-&gt;lon[a] - cities-&gt;lon[b])*conversion)*cos(cities-&gt;lat[a]*conversion)*cos(cities-&gt;lat[b]*conversion) );
+</a><a id="l240">240	}
+</a></pre> </div></div>
+<div class="footer">
+<div class="title">Intel Corporation 2015
+</div>
+</div>
+</body>
+</html>

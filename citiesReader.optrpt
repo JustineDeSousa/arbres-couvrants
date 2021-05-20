@@ -1,0 +1,180 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+
+Begin optimization report for: citiesReader(int, int, char *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (citiesReader(int, int, char *))
+  -> INLINE: (32,19) atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (36,19) atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (59,19) atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (64,17) atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (68,17) atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (71,21) atof(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (73,21) atof(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(55,5)
+   remark #25460: No loop optimizations reported
+
+   LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(63,9)
+      remark #25460: No loop optimizations reported
+   LOOP END
+
+   LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(67,9)
+      remark #25460: No loop optimizations reported
+   LOOP END
+
+   LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(70,7)
+      remark #25436: completely unrolled by 5  
+   LOOP END
+
+   LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(60,7)
+      remark #25436: completely unrolled by 2  
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(8,64):remark #34051: REGISTER ALLOCATION : [citiesReader] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c:8
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   15[ rax rdx rcx rbx rbp rsi rdi r8-r9 r12-r15 zmm0-zmm1]
+        
+    Routine temporaries
+        Total         :     216
+            Global    :      81
+            Local     :     135
+        Regenerable   :      64
+        Spilled       :      15
+        
+    Routine stack
+        Variables     :     514 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       1 [0.00e+00 ~ 0.0%]
+        Spills        :      88 bytes*
+            Reads     :      29 [0.00e+00 ~ 0.0%]
+            Writes    :      26 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: bigcitiesReader()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (bigcitiesReader())
+  -> INLINE: (148,19) atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (152,19) atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (154,21) atof(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+  -> INLINE: (156,21) atof(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(149,7)
+   remark #25436: completely unrolled by 2  
+LOOP END
+
+LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(153,7)
+   remark #25436: completely unrolled by 5  
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(109,32):remark #34051: REGISTER ALLOCATION : [bigcitiesReader] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c:109
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   17[ rax rdx rcx rbx rbp rsi rdi r8-r10 r12-r15 zmm0-zmm2]
+        
+    Routine temporaries
+        Total         :     204
+            Global    :      69
+            Local     :     135
+        Regenerable   :      65
+        Spilled       :      18
+        
+    Routine stack
+        Variables     :     556 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       4 [0.00e+00 ~ 0.0%]
+        Spills        :     136 bytes*
+            Reads     :      40 [0.00e+00 ~ 0.0%]
+            Writes    :      35 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: poids(ListOfCities *, int, int)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (poids(ListOfCities *, int, int))
+
+
+    Report from: Code generation optimizations [cg]
+
+/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(232,48):remark #34051: REGISTER ALLOCATION : [poids] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c:232
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   10[ rax rdx rbx rsi rdi r13-r15 zmm0-zmm1]
+        
+    Routine temporaries
+        Total         :      50
+            Global    :      24
+            Local     :      26
+        Regenerable   :       1
+        Spilled       :       8
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :      32 bytes*
+            Reads     :       4 [4.71e+00 ~ 4.7%]
+            Writes    :       4 [4.71e+00 ~ 4.7%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
