@@ -3,11 +3,22 @@ Intel(R) Advisor can now assist with vectorization and show optimization
 See "https://software.intel.com/en-us/intel-advisor-xe" for details.
 
 
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
 Begin optimization report for: citiesReader(int, int, char *)
 
     Report from: Interprocedural optimizations [ipo]
 
-INLINE REPORT: (citiesReader(int, int, char *))
+INLINE REPORT: (citiesReader(int, int, char *)) [3] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(8,64)
   -> INLINE: (32,19) atoi(const char *)
      {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
   -> INLINE: (36,19) atoi(const char *)
@@ -27,24 +38,42 @@ INLINE REPORT: (citiesReader(int, int, char *))
     Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
 
 
+LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(29,5)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(33,7)
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(34,17) ]
+   LOOP END
+LOOP END
+
 LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(55,5)
-   remark #25460: No loop optimizations reported
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
 
    LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(63,9)
-      remark #25460: No loop optimizations reported
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(63,41) ]
    LOOP END
 
    LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(67,9)
-      remark #25460: No loop optimizations reported
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(67,41) ]
    LOOP END
 
    LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(70,7)
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(70,39) ]
       remark #25436: completely unrolled by 5  
    LOOP END
 
    LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(60,7)
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(60,39) ]
       remark #25436: completely unrolled by 2  
    LOOP END
+LOOP END
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(97,5)
+   remark #15523: loop was not vectorized: loop control variable i was found, but loop iteration count cannot be computed before executing the loop
 LOOP END
 
     Report from: Code generation optimizations [cg]
@@ -84,7 +113,7 @@ Begin optimization report for: bigcitiesReader()
 
     Report from: Interprocedural optimizations [ipo]
 
-INLINE REPORT: (bigcitiesReader())
+INLINE REPORT: (bigcitiesReader()) [4] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(109,32)
   -> INLINE: (148,19) atoi(const char *)
      {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
   -> INLINE: (152,19) atoi(const char *)
@@ -99,11 +128,29 @@ INLINE REPORT: (bigcitiesReader())
 
 
 LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(149,7)
+   remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(149,39) ]
    remark #25436: completely unrolled by 2  
 LOOP END
 
+LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(151,7)
+   remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(151,39) ]
+LOOP END
+
 LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(153,7)
+   remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(153,39) ]
    remark #25436: completely unrolled by 5  
+LOOP END
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(145,5)
+   remark #15532: loop was not vectorized: compile time constraints prevent loop optimization. Consider using -O3.
+LOOP END
+
+LOOP BEGIN at /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(221,5)
+   remark #15523: loop was not vectorized: loop control variable i was found, but loop iteration count cannot be computed before executing the loop
 LOOP END
 
     Report from: Code generation optimizations [cg]
@@ -143,7 +190,7 @@ Begin optimization report for: poids(ListOfCities *, int, int)
 
     Report from: Interprocedural optimizations [ipo]
 
-INLINE REPORT: (poids(ListOfCities *, int, int))
+INLINE REPORT: (poids(ListOfCities *, int, int)) [5] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(232,48)
 
 
     Report from: Code generation optimizations [cg]

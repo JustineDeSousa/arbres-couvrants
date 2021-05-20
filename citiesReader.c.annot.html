@@ -14,7 +14,17 @@
 <div class="title">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c
 </div>
 </div><div class="scrollable_left"><h5 style="color:#032640">Routines with optimization reports</h5><a class="annot_link" href="#l8">citiesReader(int,&nbsp;int,&nbsp;char&nbsp;*)</a><br/><a class="annot_link" href="#l109">bigcitiesReader()</a><br/><a class="annot_link" href="#l232">poids(ListOfCities&nbsp;*,&nbsp;int,&nbsp;int)</a><br/></div><div class="scrollable_right" id="code_layout">
- <pre style="border-width:0px;"><a id="l1">1	#include "citiesReader.h"
+ <pre style="border-width:0px;"></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+</pre>
+<pre style="border-width:0px;"><a id="l1">1	#include "citiesReader.h"
 </a><a id="l2">2	
 </a><a id="l3">3	#include &lt;stdlib.h&gt;
 </a><a id="l4">4	#include &lt;stdio.h&gt;
@@ -23,7 +33,7 @@
 </a><a id="l7">7	
 </a><a id="l8">8	ListOfCities* citiesReader(int popMin, int dpt, char* filename){
 </a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
-INLINE REPORT: (citiesReader(int, int, char *))
+INLINE REPORT: (citiesReader(int, int, char *)) [3] <a class="annot_link" href="citiesReader.c.annot.html#l8">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(8,64)</a>
   -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l32">(32,19)</a> atoi(const char *)
      {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
   -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l36">(36,19)</a> atoi(const char *)
@@ -90,7 +100,17 @@ INLINE REPORT: (citiesReader(int, int, char *))
 </a><a id="l27">27	    // Count the number of cities with population greater than or equal to 'popMin'
 </a><a id="l28">28	    cities-&gt;number = 0;
 </a><a id="l29">29	    while(fgets(line, 512, inputFile) != NULL){
-</a><a id="l30">30	      token = strtok(line, s);
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+
+LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l29">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(29,5)</a>
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l33">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(33,7)</a>
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ <a class="annot_link" href="citiesReader.c.annot.html#l34">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(34,17)</a> ]
+   LOOP END
+LOOP END
+</pre>
+<pre style="border-width:0px;"><a id="l30">30	      token = strtok(line, s);
 </a><a id="l31">31	      token = strtok(NULL, s);
 </a><a id="l32">32	      int myDpt = atoi(token);
 </a><a id="l33">33	      for(int i=0; i&lt;13; i++){
@@ -119,21 +139,23 @@ INLINE REPORT: (citiesReader(int, int, char *))
 </a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
 
 LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l55">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(55,5)</a>
-   remark #25460: No loop optimizations reported
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
 
    LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l63">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(63,9)</a>
-      remark #25460: No loop optimizations reported
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ <a class="annot_link" href="citiesReader.c.annot.html#l63">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(63,41)</a> ]
    LOOP END
 
    LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l67">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(67,9)</a>
-      remark #25460: No loop optimizations reported
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ <a class="annot_link" href="citiesReader.c.annot.html#l67">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(67,41)</a> ]
    LOOP END
 
    LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l70">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(70,7)</a>
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ <a class="annot_link" href="citiesReader.c.annot.html#l70">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(70,39)</a> ]
       remark #25436: completely unrolled by 5  
    LOOP END
 
    LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l60">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(60,7)</a>
+      remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ <a class="annot_link" href="citiesReader.c.annot.html#l60">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(60,39)</a> ]
       remark #25436: completely unrolled by 2  
    LOOP END
 LOOP END
@@ -180,7 +202,17 @@ LOOP END
 </a><a id="l95">95	  outputFile = fopen(filename, "w");
 </a><a id="l96">96	  if(outputFile != NULL){
 </a><a id="l97">97	    for(int i=0; i&lt;cities-&gt;number; i++){
-</a><a id="l98">98	      fprintf(outputFile, "%i %f %f\n", cities-&gt;pop[i], cities-&gt;lon[i], cities-&gt;lat[i]);
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l97">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(97,5)</a>
+   remark #15523: loop was not vectorized: loop control variable i was found, but loop iteration count cannot be computed before executing the loop
+LOOP END
+</pre>
+<pre style="border-width:0px;"><a id="l98">98	      fprintf(outputFile, "%i %f %f\n", cities-&gt;pop[i], cities-&gt;lon[i], cities-&gt;lat[i]);
 </a><a id="l99">99	    }
 </a><a id="l100">100	    fclose(outputFile);
 </a><a id="l101">101	  }
@@ -193,7 +225,7 @@ LOOP END
 </a><a id="l108">108	
 </a><a id="l109">109	ListOfCities* bigcitiesReader(){
 </a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
-INLINE REPORT: (bigcitiesReader())
+INLINE REPORT: (bigcitiesReader()) [4] <a class="annot_link" href="citiesReader.c.annot.html#l109">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(109,32)</a>
   -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l148">(148,19)</a> atoi(const char *)
      {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
   -&gt; INLINE: <a class="annot_link" href="citiesReader.c.annot.html#l152">(152,19)</a> atoi(const char *)
@@ -269,23 +301,41 @@ INLINE REPORT: (bigcitiesReader())
 </a><a id="l143">143	    strcpy(lastcity,"FOSSES"); //the last city of the list
 </a><a id="l144">144	    char *myName = malloc(32*sizeof(char));
 </a><a id="l145">145	    while(fgets(line, 512, inputFile) != NULL){
-</a><a id="l146">146	      token = strtok(line, s);
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l145">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(145,5)</a>
+   remark #15532: loop was not vectorized: compile time constraints prevent loop optimization. Consider using -O3.
+LOOP END
+</pre>
+<pre style="border-width:0px;"><a id="l146">146	      token = strtok(line, s);
 </a><a id="l147">147	      token = strtok(NULL, s);
 </a><a id="l148">148	      int myDpt = atoi(token);
 </a><a id="l149">149	      for(int i=0; i&lt;2;  i++) token = strtok(NULL, s);
 </a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
 
 LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l149">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(149,7)</a>
+   remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ <a class="annot_link" href="citiesReader.c.annot.html#l149">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(149,39)</a> ]
    remark #25436: completely unrolled by 2  
 LOOP END
 </pre>
 <pre style="border-width:0px;"><a id="l150">150	      strncpy(myName, token, 32);
 </a><a id="l151">151	      for(int i=0; i&lt;11; i++) token = strtok(NULL, s);
-</a><a id="l152">152	      int myPop = atoi(token);
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+
+LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l151">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(151,7)</a>
+   remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ <a class="annot_link" href="citiesReader.c.annot.html#l151">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(151,39)</a> ]
+LOOP END
+</pre>
+<pre style="border-width:0px;"><a id="l152">152	      int myPop = atoi(token);
 </a><a id="l153">153	      for(int i=0; i&lt;5;  i++) token = strtok(NULL, s);
 </a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
 
 LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l153">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(153,7)</a>
+   remark #15527: loop was not vectorized: function call to strtok(char *__restrict__, const char *__restrict__) cannot be vectorized   [ <a class="annot_link" href="citiesReader.c.annot.html#l153">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(153,39)</a> ]
    remark #25436: completely unrolled by 5  
 LOOP END
 </pre>
@@ -357,7 +407,13 @@ LOOP END
 </a><a id="l219">219	  outputFile = fopen("resuBigCities.dat", "w");
 </a><a id="l220">220	  if(outputFile != NULL){
 </a><a id="l221">221	    for(int i=0; i&lt;cities-&gt;number; i++){
-</a><a id="l222">222	      fprintf(outputFile, "%i %f %f\n", cities-&gt;pop[i], cities-&gt;lon[i], cities-&gt;lat[i]);
+</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
+
+LOOP BEGIN at <a class="annot_link" href="citiesReader.c.annot.html#l221">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(221,5)</a>
+   remark #15523: loop was not vectorized: loop control variable i was found, but loop iteration count cannot be computed before executing the loop
+LOOP END
+</pre>
+<pre style="border-width:0px;"><a id="l222">222	      fprintf(outputFile, "%i %f %f\n", cities-&gt;pop[i], cities-&gt;lon[i], cities-&gt;lat[i]);
 </a><a id="l223">223	    }
 </a><a id="l224">224	    fclose(outputFile);
 </a><a id="l225">225	  }
@@ -369,7 +425,7 @@ LOOP END
 </a><a id="l231">231	
 </a><a id="l232">232	float poids(ListOfCities* cities, int a, int b){
 </a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
-INLINE REPORT: (poids(ListOfCities *, int, int))
+INLINE REPORT: (poids(ListOfCities *, int, int)) [5] <a class="annot_link" href="citiesReader.c.annot.html#l232">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(232,48)</a>
 
 <a class="annot_link" href="citiesReader.c.annot.html#l232">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(232,48)</a>:remark #34051: REGISTER ALLOCATION : [poids] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c:232
 
