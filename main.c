@@ -11,10 +11,7 @@
 #include <stdbool.h>
 #include <float.h>
 #include <math.h>
-#include <time.h>
-
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-
+#include <mkl.h>
 
 int main() {
 
@@ -26,7 +23,7 @@ int main() {
   ListOfCities* cities;
   float taille_reseau = 0;
   int nb_villes = 0;
-  float time = 0;
+  double time = 0;
 
   for(int dpt = 1; dpt<95; dpt++){
 //-----------------------------------------------------------------
@@ -36,10 +33,13 @@ int main() {
     sprintf(outputFile,"resuCities_%d.dat",dpt);
     cities = citiesReader(popMin,dpt,outputFile);
     nb_villes += cities->number;
+
+    //TEMPS DE CALCUL: entrée dans l'algo
+    unsigned MKL_INT64 t0;
+    mkl_get_cpu_clocks(&t0);
 //-----------------------------------------------------------------
 //--- COMPUTING graph
 //----------------------------------------------------------------- 
-    clock_t t0 = clock();
     // allocation des variables
     bool* dansS = malloc(cities->number*sizeof(bool));
     int* voisin = malloc(cities->number*sizeof(int));
@@ -99,9 +99,17 @@ int main() {
     free(dansS);
     free(voisin);
     free(dist);
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+
+
+    //TEMPS DE CALCUL: sortie de l'algo
+    unsigned MKL_INT64 t1;
+    mkl_get_cpu_clocks(&t1);
+    time += (double)(t1-t0)/mkl_get_clocks_frequency();
+
     
-    clock_t t1 = clock();
-    time += (t1-t0)/CLOCKS_PER_SEC;
   }
 
 
@@ -109,11 +117,14 @@ int main() {
 //--- READING bigger city from each departement
 //-----------------------------------------------------------------                             
   cities = bigcitiesReader();
+
+  //TEMPS DE CALCUL: entrée dans l'algo
+  unsigned MKL_INT64 t2;
+  mkl_get_cpu_clocks(&t2);
+
 //-----------------------------------------------------------------
 //--- COMPUTING graph
 //-----------------------------------------------------------------
-  
-  clock_t t2 = clock();
   // allocation des variables
   bool* dansS = malloc(cities->number*sizeof(bool));
   int* voisin = malloc(cities->number*sizeof(int));
@@ -171,8 +182,14 @@ int main() {
   free(voisin);
   free(dist);
   
-  clock_t t3 = clock();
-  float duration = (float)(t3 - t2) / CLOCKS_PER_SEC + time;
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+  //TEMPS DE CALCUL: sortie de l'algo
+  unsigned MKL_INT64 t3;
+  mkl_get_cpu_clocks(&t3);
+  //TEMPS DE CALCUL TOTAL
+  double duration = (double)(t3 - t2) / mkl_get_clocks_frequency + time;
   printf("time is %f second\n ",duration);
 
 //---------------------------------------------------------------
@@ -233,7 +250,9 @@ int main() {
       }
     }
   }
-
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
 
 
   // ... just to check! This line can be removed.
