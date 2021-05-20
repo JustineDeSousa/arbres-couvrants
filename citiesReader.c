@@ -50,6 +50,7 @@ ListOfCities* citiesReader(int popMin, int dpt, char* filename){
     
     // Reading/Saving data
     int index = 0;
+    int myPop = 0;
     char *myName = malloc(32*sizeof(char));
     while(fgets(line, 512, inputFile) != NULL){
       //printf("%s\n",line);
@@ -58,8 +59,14 @@ ListOfCities* citiesReader(int popMin, int dpt, char* filename){
       int myDpt = atoi(token);
       for(int i=0; i<2;  i++) token = strtok(NULL, s);
       strncpy(myName, token, 32);
-      for(int i=0; i<11; i++) token = strtok(NULL, s);
-      int myPop = atoi(token);
+      if (strcmp(myName,"Y")==0){
+        for(int i=0; i<10; i++) token = strtok(NULL, s);
+        myPop = atoi(token);
+      }
+      else{
+        for(int i=0; i<11; i++) token = strtok(NULL, s);
+        myPop = atoi(token);
+      }
       for(int i=0; i<5;  i++) token = strtok(NULL, s);
       float myLon = atof(token);
       for(int i=0; i<1;  i++) token = strtok(NULL, s);
