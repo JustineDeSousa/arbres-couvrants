@@ -80,6 +80,14 @@ int main() {
       k ++;
     }
 //-----------------------------------------------------------------
+//--- GRAPH COMPUTED
+//-----------------------------------------------------------------
+    //TEMPS DE CALCUL: sortie de l'algo
+    unsigned MKL_INT64 t1;
+    mkl_get_cpu_clocks(&t1);
+    time += (double)(t1-t0)/mkl_get_clocks_frequency();
+
+//-----------------------------------------------------------------
 //--- WRITING GRAPH for cities from departement = dpt
 //----------------------------------------------------------------- 
     char filename[50];
@@ -95,21 +103,13 @@ int main() {
       taille_reseau_dpt += poids(cities,i,voisin[i]);
     }
     taille_reseau += taille_reseau_dpt;
-    
+
+//-----------------------------------------------------------------
+//--- DEALLOCATE arrays
+//-----------------------------------------------------------------
     free(dansS);
     free(voisin);
     free(dist);
-//-----------------------------------------------------------------
-//-----------------------------------------------------------------
-//-----------------------------------------------------------------
-
-
-    //TEMPS DE CALCUL: sortie de l'algo
-    unsigned MKL_INT64 t1;
-    mkl_get_cpu_clocks(&t1);
-    time += (double)(t1-t0)/mkl_get_clocks_frequency();
-
-
   }
 
 
@@ -166,6 +166,16 @@ int main() {
     k ++;
   }
 //-----------------------------------------------------------------
+//--- GRAPH COMPUTED
+//-----------------------------------------------------------------
+  //TEMPS DE CALCUL: sortie de l'algo
+  unsigned MKL_INT64 t3;
+  mkl_get_cpu_clocks(&t3);
+  //TEMPS DE CALCUL TOTAL
+  double duration = (double)(t3 - t2 + time)/mkl_get_clocks_frequency()/1e9;
+  printf("time is %f second\n ",duration);
+
+//-----------------------------------------------------------------
 //--- WRITING GRAPH for big cities
 //-----------------------------------------------------------------
   FILE* fileOut = fopen("resuGraph_bigcities.dat", "w");
@@ -177,20 +187,19 @@ int main() {
   for(int i = 0; i < cities->number; i++){ 
     taille_reseau += poids(cities,i,voisin[i]);
   }
-  
+//-----------------------------------------------------------------
+//--- DEALLOCATE arrays
+//-----------------------------------------------------------------
   free(dansS);
   free(voisin);
   free(dist);
-  
-//-----------------------------------------------------------------
-//-----------------------------------------------------------------
-//-----------------------------------------------------------------
-  //TEMPS DE CALCUL: sortie de l'algo
-  unsigned MKL_INT64 t3;
-  mkl_get_cpu_clocks(&t3);
-  //TEMPS DE CALCUL TOTAL
-  double duration = (double)(t3 - t2 + time)/mkl_get_clocks_frequency()/1e9;
-  printf("time is %f second\n ",duration);
+
+  free(cities->dpt);
+  free(cities->name);
+  free(cities->pop);
+  free(cities->lon);
+  free(cities->lat);
+  free(cities);
 
 //---------------------------------------------------------------
 //--- Réunion de tous les fichiers
@@ -251,26 +260,11 @@ int main() {
     }
   }
 //-----------------------------------------------------------------
-//-----------------------------------------------------------------
+//--- FICHIERS DPT REUNIS DANS resuGraph.dat et resuCities.dat
 //-----------------------------------------------------------------
 
-
-  // ... just to check! This line can be removed.
   printf("\n %i cities: \n\n", nb_villes);
   printf("Taille du reseau: %1.0f km\n",taille_reseau);
-  
-
-
-  //-----------------------------------------------------------------
-  //--- DEALLOCATE arrays
-  //-----------------------------------------------------------------
-  
-  free(cities->dpt);
-  free(cities->name);
-  free(cities->pop);
-  free(cities->lon);
-  free(cities->lat);
-  free(cities);
 
   return 0;
 }
