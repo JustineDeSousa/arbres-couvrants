@@ -66,7 +66,7 @@ int main() {
             i = j;
           }
         }
-      }//minDist,min_i OK
+      }
       dansS[i] = true;
       
       for(int j = 0; j < cities->number; j++){
@@ -152,7 +152,7 @@ int main() {
           i = j;
         }
       }
-    }//minDist,min_i OK
+    }
     dansS[i] = true;
     
     for(int j = 0; j < cities->number; j++){
