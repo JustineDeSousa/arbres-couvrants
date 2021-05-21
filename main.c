@@ -29,108 +29,118 @@ int main() {
   printf("Classic or Variant?"); //0 for classic version, 1 for variant version
   scanf("%i",&version);
 
+  
   //Version classique
   if (version == 0){
     int popMin;
-    printf("Minimal population? ");
-    scanf("%i", &popMin);
+    FILE* timesfile = NULL;
+    timesfile = fopen("timesfile.txt","w");
+    
+    //printf("Minimal population? ");
+    //scanf("%i", &popMin);
 
     ListOfCities* cities;
     float taille_reseau = 0.0;
     int nb_villes = 0;
-    cities = citiesReader_classic(popMin);
-    nb_villes += cities->number;
 
-//-----------------------------------------------------------------
-//--- COMPUTING graph
-//-----------------------------------------------------------------
+    for(popMin = 250000; popMin >=0; popMin-=10000){
+      cities = citiesReader_classic(popMin);
+      nb_villes += cities->number;
 
-    //TEMPS DE CALCUL: entrée dans l'algo
-    unsigned MKL_INT64 t0;
-    mkl_get_cpu_clocks(&t0);
+  //-----------------------------------------------------------------
+  //--- COMPUTING graph
+  //-----------------------------------------------------------------
 
-    // allocation des variables
-    bool* dansS = malloc(cities->number*sizeof(bool));
-    int* voisin = malloc(cities->number*sizeof(int));
-    float* dist = malloc(cities->number*sizeof(float));
+      //TEMPS DE CALCUL: entrée dans l'algo
+      unsigned MKL_INT64 t0;
+      mkl_get_cpu_clocks(&t0);
 
-    //Initialisation
-    dansS[0] = true; //On démarre du sommet 0
-    dist[0] = 0; //dist(0,0)=0
+      // allocation des variables
+      bool* dansS = malloc(cities->number*sizeof(bool));
+      int* voisin = malloc(cities->number*sizeof(int));
+      float* dist = malloc(cities->number*sizeof(float));
 
-    for(int i = 1; i < cities->number; i++){
-      dansS[i] = false;
-      dist[i] = poids(cities,0,i);
-      voisin[i] = 0;
-    }
+      //Initialisation
+      dansS[0] = true; //On démarre du sommet 0
+      dist[0] = 0; //dist(0,0)=0
 
-    //Itérations
-    int k = 0;
-    while(k < cities->number - 2){
-      //Trouver i tels que (dansS[i]=false) et (dist[i] est minimal)
-      float minDist = FLT_MAX;
-      int i = 0;
-      for(int j = 1; j < cities->number; j++){
-        if( dansS[j] == false){
-          if(dist[j] < minDist){
-            minDist = dist[j];
-            i = j;
+      for(int i = 1; i < cities->number; i++){
+        dansS[i] = false;
+        dist[i] = poids(cities,0,i);
+        voisin[i] = 0;
+      }
+
+      //Itérations
+      int k = 0;
+      while(k < cities->number - 2){
+        //Trouver i tels que (dansS[i]=false) et (dist[i] est minimal)
+        float minDist = FLT_MAX;
+        int i = 0;
+        for(int j = 1; j < cities->number; j++){
+          if( dansS[j] == false){
+            if(dist[j] < minDist){
+              minDist = dist[j];
+              i = j;
+            }
+          }
+        }//minDist,min_i OK
+        dansS[i] = true;
+
+        #pragma omp parallel for
+        for(int j = 0; j < cities->number; j++){
+          if( dansS[j] == false && dist[j] > poids(cities,i,j)){
+            dist[j] = poids(cities,i,j);
+            voisin[j] = i;
           }
         }
-      }//minDist,min_i OK
-      dansS[i] = true;
+        k ++;
+      }
 
-      #pragma omp parallel for
-      for(int j = 0; j < cities->number; j++){
-        if( dansS[j] == false && dist[j] > poids(cities,i,j)){
-          dist[j] = poids(cities,i,j);
-          voisin[j] = i;
+      //TEMPS DE CALCUL: sortie de l'algo
+      unsigned MKL_INT64 t1;
+      mkl_get_cpu_clocks(&t1);
+
+    // Écriture du graphe (chaque ligne correspond à une arête)
+    
+      FILE* fileOut = NULL;
+      fileOut = fopen("resuGraph.dat", "w");
+      for(int i=0; i<cities->number; i++){
+        for(int j=0; j<i; j++){
+          fprintf(fileOut, "%i %i\n", i, voisin[i]);
         }
       }
-      k ++;
-    }
-
-    //TEMPS DE CALCUL: sortie de l'algo
-    unsigned MKL_INT64 t1;
-    mkl_get_cpu_clocks(&t1);
-
-  // Écriture du graphe (chaque ligne correspond à une arête)
+      fclose(fileOut);
   
-    FILE* fileOut = NULL;
-    fileOut = fopen("resuGraph.dat", "w");
-    for(int i=0; i<cities->number; i++){
-      for(int j=0; j<i; j++){
-        fprintf(fileOut, "%i %i\n", i, voisin[i]);
+      for(int i = 0; i < cities->number; i++){ 
+        taille_reseau += poids(cities,i,voisin[i]);
+        if(i==-1) printf("taille reseau = %f",taille reseau);
       }
+      
+
+  //-----------------------------------------------------------------
+  //--- DEALLOCATE arrays
+  //-----------------------------------------------------------------
+      free(dansS);
+      free(voisin);
+      free(dist);
+
+      free(cities->name);
+      free(cities->pop);
+      free(cities->lon);
+      free(cities->lat);
+      free(cities);
+
+      double duration = (double)(t1 - t0)/mkl_get_clocks_frequency()/1e9; 
+
+
+      fprintf(timesfile,"%i %f",nb_villes,duration);
     }
-    fclose(fileOut);
- 
-    for(int i = 0; i < cities->number; i++){ 
-      taille_reseau += poids(cities,i,voisin[i]);
-      if(i==-1) printf("taille reseau = %f",taille_reseau);
-    }
-    
-
-//-----------------------------------------------------------------
-//--- DEALLOCATE arrays
-//-----------------------------------------------------------------
-    free(dansS);
-    free(voisin);
-    free(dist);
-
-    free(cities->name);
-    free(cities->pop);
-    free(cities->lon);
-    free(cities->lat);
-    free(cities);
-
-    double duration = (double)(t1 - t0)/mkl_get_clocks_frequency()/1e9; 
+    fclose(timesfile);
 
     printf("\t%i cities: \n", nb_villes);
     printf("Taille du reseau: %1.0f km\n",taille_reseau);
     printf("Time is %fs\n ",duration);
     
-
     return 0;
   }
 
