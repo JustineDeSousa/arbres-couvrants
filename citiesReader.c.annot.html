@@ -13,7 +13,7 @@
 <div class="inner_header">
 <div class="title">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c
 </div>
-</div><div class="scrollable_left"><h5 style="color:#032640">Routines with optimization reports</h5><a class="annot_link" href="#l8">citiesReader(int,&nbsp;int,&nbsp;char&nbsp;*)</a><br/><a class="annot_link" href="#l109">bigcitiesReader()</a><br/><a class="annot_link" href="#l232">poids(ListOfCities&nbsp;*,&nbsp;int,&nbsp;int)</a><br/></div><div class="scrollable_right" id="code_layout">
+</div><div class="scrollable_left"><h5 style="color:#032640">Routines with optimization reports</h5><a class="annot_link" href="#l8">citiesReader(int,&nbsp;int,&nbsp;char&nbsp;*)</a><br/><a class="annot_link" href="#l109">bigcitiesReader()</a><br/></div><div class="scrollable_right" id="code_layout">
  <pre style="border-width:0px;"></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
 INLINING OPTION VALUES:
   -inline-factor: 100
@@ -421,50 +421,6 @@ LOOP END
 </a><a id="l227">227	  return cities;
 </a><a id="l228">228	
 </a><a id="l229">229	}
-</a><a id="l230">230	
-</a><a id="l231">231	
-</a><a id="l232">232	float poids(ListOfCities* cities, int a, int b){
-</a></pre><pre style="display:inline-block;padding:5px;margin-right:3px;font-color:#AEAEAEk;font-size:11px;border-radius:12px;border:1px solid #dddddd; background:#fbfbfb">
-INLINE REPORT: (poids(ListOfCities *, int, int)) [5] <a class="annot_link" href="citiesReader.c.annot.html#l232">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(232,48)</a>
-
-<a class="annot_link" href="citiesReader.c.annot.html#l232">/auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c(232,48)</a>:remark #34051: REGISTER ALLOCATION : [poids] /auto/d/de-sousa/SIM203/arbres-couvrants/citiesReader.c:232
-
-    Hardware registers
-        Reserved     :    2[ rsp rip]
-        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
-        Callee-save  :    6[ rbx rbp r12-r15]
-        Assigned     :   10[ rax rdx rbx rsi rdi r13-r15 zmm0-zmm1]
-        
-    Routine temporaries
-        Total         :      50
-            Global    :      24
-            Local     :      26
-        Regenerable   :       1
-        Spilled       :       8
-        
-    Routine stack
-        Variables     :       0 bytes*
-            Reads     :       0 [0.00e+00 ~ 0.0%]
-            Writes    :       0 [0.00e+00 ~ 0.0%]
-        Spills        :      32 bytes*
-            Reads     :       4 [4.71e+00 ~ 4.7%]
-            Writes    :       4 [4.71e+00 ~ 4.7%]
-    
-    Notes
-    
-        *Non-overlapping variables and spills may share stack space,
-         so the total stack size might be less than this.
-    
-
-</pre>
-<pre style="border-width:0px;"><a id="l233">233	  if(a==b){
-</a><a id="l234">234	    return 0;
-</a><a id="l235">235	  }
-</a><a id="l236">236	  int R = 6378;
-</a><a id="l237">237	  float pi = 3.14;
-</a><a id="l238">238	  float conversion = pi/180;
-</a><a id="l239">239	  return R*acos( sin(cities-&gt;lat[a] * conversion)*sin(cities-&gt;lat[b]*conversion) + cos((cities-&gt;lon[a] - cities-&gt;lon[b])*conversion)*cos(cities-&gt;lat[a]*conversion)*cos(cities-&gt;lat[b]*conversion) );
-</a><a id="l240">240	}
 </a></pre> </div></div>
 <div class="footer">
 <div class="title">Intel Corporation 2015

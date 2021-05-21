@@ -55,7 +55,6 @@ int main() {
     //Initialisation
     dansS[0] = true;  //On démarre du sommet 0
     dist[0] = 0;      //dist(0,0) = 0
-
     for(int i = 0; i < cities->number; i++){
       dansS[i] = false;
       dist[i] = poids(cities,0,i);
@@ -75,7 +74,7 @@ int main() {
       }
       dansS[i] = true;
       
-      //#pragma omp parallel for
+      #pragma omp parallel for
       for(int j = 0; j < cities->number; j++){
         if( dansS[j] == false && dist[j] > poids(cities,i,j)){
           dist[j] = poids(cities,i,j);
