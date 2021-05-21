@@ -19,9 +19,7 @@
 #define conversion pi/180
 
 inline float poids(ListOfCities* cities, int a, int b){
-  if(a==b){
-    return 0;
-  }
+  if(a==b) return 0;
   return R*acos( sin(cities->lat[a] * conversion)*sin(cities->lat[b]*conversion) + cos((cities->lon[a] - cities->lon[b])*conversion)*cos(cities->lat[a]*conversion)*cos(cities->lat[b]*conversion) );
 }
 
@@ -31,13 +29,16 @@ int main() {
   printf("Minimal population? ");
   scanf("%i", &popMin);
 
-
+// allocation des variables
   ListOfCities* cities;
   float taille_reseau = 0;
   int nb_villes = 0;
   double time = 0;
+  bool* dansS = malloc(1024*sizeof(bool));
+  int* voisin = malloc(1024*sizeof(int));
+  float* dist = malloc(1024*sizeof(float));
 
-  for(int dpt = 1; dpt<95; dpt++){
+  for(int dpt = 1; dpt<96; dpt++){
 //-----------------------------------------------------------------
 //--- READING cities from departement = dpt
 //-----------------------------------------------------------------
@@ -45,25 +46,19 @@ int main() {
     sprintf(outputFile,"resuCities_%d.dat",dpt);
     cities = citiesReader(popMin,dpt,outputFile);
     nb_villes += cities->number;
-
     //TEMPS DE CALCUL: entrée dans l'algo
     unsigned MKL_INT64 t0;
     mkl_get_cpu_clocks(&t0);
 //-----------------------------------------------------------------
 //--- COMPUTING graph
 //----------------------------------------------------------------- 
-    // allocation des variables
-    bool* dansS = malloc(cities->number*sizeof(bool));
-    int* voisin = malloc(cities->number*sizeof(int));
-    float* dist = malloc(cities->number*sizeof(float));
-
     //Initialisation
     dansS[0] = true;  //On démarre du sommet 0
     dist[0] = 0;      //dist(0,0) = 0
 
     for(int i = 0; i < cities->number; i++){
       dansS[i] = false;
-      dist[i] = R*acos( sin(cities->lat[0] * conversion)*sin(cities->lat[i]*conversion) + cos((cities->lon[0] - cities->lon[i])*conversion)*cos(cities->lat[0]*conversion)*cos(cities->lat[i]*conversion) );
+      dist[i] = poids(cities,0,i);
       voisin[i] = 0;
     }
     //Itérations
@@ -73,22 +68,18 @@ int main() {
       float minDist = FLT_MAX;
       int i = 0;
       for(int j = 1; j < cities->number; j++){
-        if( dansS[j] == false){
-          if(dist[j] < minDist){
-            minDist = dist[j];
-            i = j;
-          }
+        if( dansS[j] == false && dist[j] < minDist){
+          minDist = dist[j];
+          i = j;
         }
       }
       dansS[i] = true;
       
-      #pragma omp parallel for
+      //#pragma omp parallel for
       for(int j = 0; j < cities->number; j++){
-        if( dansS[j] == false ){
-          if( dist[j] > poids(cities,i,j) ){
-            dist[j] = poids(cities,i,j);
-            voisin[j] = i;
-          }
+        if( dansS[j] == false && dist[j] > poids(cities,i,j)){
+          dist[j] = poids(cities,i,j);
+          voisin[j] = i;
         }
       }
       k ++;
@@ -115,15 +106,9 @@ int main() {
     float taille_reseau_dpt = 0;
     for(int i = 0; i < cities->number; i++){ 
       taille_reseau_dpt += poids(cities,i,voisin[i]);
+      if(dpt==0 && i ==0) printf("taille reseau dpt %i ville %i= %f\n",dpt,i,taille_reseau_dpt);
     }
     taille_reseau += taille_reseau_dpt;
-
-//-----------------------------------------------------------------
-//--- DEALLOCATE arrays
-//-----------------------------------------------------------------
-    free(dansS);
-    free(voisin);
-    free(dist);
   }
 
 
@@ -139,11 +124,6 @@ int main() {
 //-----------------------------------------------------------------
 //--- COMPUTING graph
 //-----------------------------------------------------------------
-  // allocation des variables
-  bool* dansS = malloc(cities->number*sizeof(bool));
-  int* voisin = malloc(cities->number*sizeof(int));
-  float* dist = malloc(cities->number*sizeof(float));
-
   //Initialisation
   dansS[0] = true;  //On démarre du sommet 0
   dist[0] = 0;      //dist(0,0) = 0
@@ -160,22 +140,18 @@ int main() {
     float minDist = FLT_MAX;
     int i = 0;
     for(int j = 1; j < cities->number; j++){
-      if( dansS[j] == false){
-        if(dist[j] < minDist){
-          minDist = dist[j];
-          i = j;
-        }
+      if( dansS[j] == false && dist[j] < minDist){
+        minDist = dist[j];
+        i = j;
       }
     }
     dansS[i] = true;
     
     #pragma omp parallel for
     for(int j = 0; j < cities->number; j++){
-      if( dansS[j] == false ){
-        if( dist[j] > poids(cities,i,j) ){
-          dist[j] = poids(cities,i,j);
-          voisin[j] = i;
-        }
+      if( dansS[j] == false && dist[j] > poids(cities,i,j)){
+        dist[j] = poids(cities,i,j);
+        voisin[j] = i;
       }
     }
     k ++;
@@ -226,10 +202,10 @@ int main() {
   if(citiesOutputFile != NULL && graphOutputFile != NULL){
     int n = 0;
     int nbVilles = 0;
-    for(int dpt = 1; dpt < 95; dpt ++){
-      char citiesFilename[50];
+    for(int dpt = 1; dpt < 96; dpt ++){
+      char citiesFilename[64];
       sprintf(citiesFilename,"resuCities_%d.dat",dpt);
-      char graphFilename[50];
+      char graphFilename[64];
       sprintf(graphFilename,"resuGraph_%d.dat",dpt);
       //printf("== Merging cities file with population >= %i and department = %i from %s ==\n", popMin, dpt, citiesFilename);
       //printf("== Merging graph  file with population >= %i and department = %i from %s ==\n", popMin, dpt, graphFilename);
