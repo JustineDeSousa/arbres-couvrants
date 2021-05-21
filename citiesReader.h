@@ -16,6 +16,7 @@ struct ListOfCities
 };
 
 ListOfCities* citiesReader(int popMin, int dpt,char* filename);
+ListOfCities* citiesReader_classic(int popMin);
 ListOfCities* bigcitiesReader();
 
 #endif
