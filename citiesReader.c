@@ -89,7 +89,6 @@ ListOfCities* citiesReader_classic(int popMin){
     }
     fclose(outputFile);
   }
-
   return cities;
 }
 
