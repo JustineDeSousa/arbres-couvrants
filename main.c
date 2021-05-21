@@ -107,7 +107,7 @@ int main() {
  
     for(int i = 0; i < cities->number; i++){ 
       taille_reseau += poids(cities,i,voisin[i]);
-      if(i==0) printf("taille reseau = %i",taille_reseau);
+      if(i==-1) printf("taille reseau = %f",taille_reseau);
     }
     
 
