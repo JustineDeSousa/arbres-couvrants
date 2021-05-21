@@ -77,11 +77,9 @@ int main() {
         float minDist = FLT_MAX;
         int i = 0;
         for(int j = 1; j < cities->number; j++){
-          if( dansS[j] == false){
-            if(dist[j] < minDist){
+          if( dansS[j] == false && dist[j] < minDist){
               minDist = dist[j];
               i = j;
-            }
           }
         }//minDist,min_i OK
         dansS[i] = true;
