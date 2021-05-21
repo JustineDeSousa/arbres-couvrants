@@ -19,9 +19,7 @@
 #define conversion pi/180
 
 inline float poids(ListOfCities* cities, int a, int b){
-  if(a==b){
-    return 0;
-  }
+  if(a==b)return 0;
   return R*acos( sin(cities->lat[a] * conversion)*sin(cities->lat[b]*conversion) + cos((cities->lon[a] - cities->lon[b])*conversion)*cos(cities->lat[a]*conversion)*cos(cities->lat[b]*conversion) );
 }
 
@@ -84,14 +82,11 @@ int main() {
 
       #pragma omp parallel for
       for(int j = 0; j < cities->number; j++){
-        if( dansS[j] == false ){
-          if( dist[j] > poids(cities,i,j) ){
-            dist[j] = poids(cities,i,j);
-            voisin[j] = i;
-          }
+        if( dansS[j] == false && dist[j] > poids(cities,i,j)){
+          dist[j] = poids(cities,i,j);
+          voisin[j] = i;
         }
       }
-
       k ++;
     }
 
@@ -112,6 +107,7 @@ int main() {
  
     for(int i = 0; i < cities->number; i++){ 
       taille_reseau += poids(cities,i,voisin[i]);
+      if(i==0) printf("taille reseau = %i",taille_reseau);
     }
     
 
@@ -204,7 +200,7 @@ int main() {
       //TEMPS DE CALCUL: sortie de l'algo
       unsigned MKL_INT64 t1;
       mkl_get_cpu_clocks(&t1);
-      time += (double)(t1-t0)/mkl_get_clocks_frequency();
+      time += (double)(t1-t0);
 
 //-----------------------------------------------------------------
 //--- WRITING GRAPH for cities from departement = dpt
