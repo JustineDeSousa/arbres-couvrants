@@ -1,6 +1,6 @@
 // Compilation:
-//    icc -std=c99 -mkl main.c citiesReader.c
-//    icc -std=c99 -mkl -qopt-report=1 -qopt-report-annotate=html main.c citiesReader.c
+//    icc -std=c99 -mkl -qopenmp main.c citiesReader.c
+//    icc -std=c99 -mkl -qopenmp -qopt-report=1 -qopt-report-annotate=html main.c citiesReader.c
 // Execution:
 //   ./a.out
 
@@ -82,6 +82,7 @@ int main() {
       }
       dansS[i] = true;
       
+      #pragma omp parallel for
       for(int j = 0; j < cities->number; j++){
         if( dansS[j] == false ){
           if( dist[j] > poids(cities,i,j) ){
@@ -168,6 +169,7 @@ int main() {
     }
     dansS[i] = true;
     
+    #pragma omp parallel for
     for(int j = 0; j < cities->number; j++){
       if( dansS[j] == false ){
         if( dist[j] > poids(cities,i,j) ){
